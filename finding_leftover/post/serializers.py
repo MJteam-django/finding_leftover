@@ -9,4 +9,8 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'restaurant', 'title', 'memo', 'local', 'soldout', 'poster', 'created', 'origin_price', 'new_price'] # 포스트 모델에서 가져올 필드 정하기 id는 자동생성
+        # 포스트 모델에서 가져올 필드 정하기 id는 자동생성
+        fields = ['id', 'restaurant', 'title', 'memo', 
+                'local', 'soldout', 'poster', 'created', 
+                'origin_price', 'new_price']
+        
