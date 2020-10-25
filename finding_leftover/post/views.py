@@ -12,13 +12,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 # 제네릭 뷰 사용하는 이 부분은 http렌더링 관련해서 찾아봐야할듯
-class PostList(APIView):
+class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all() # 쿼리셋 설정해줘야하고
     serializer_class = PostSerializer # 시리얼라이저 클래스 설정해줘야함
-
-    # html rendering
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'post_list.html'
 
     # 권한있는지 확인하는 permission_class(로그아웃 상태로는 list볼 수 있지만 create는 불가능)
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -26,10 +22,7 @@ class PostList(APIView):
     def perform_create(self, serializer):
         # create 이벤트를 만들 때마다 poster를 만들거야
         serializer.save(poster=self.request.user)
-    
-    def get(self, request):
-        queryset = Post.objects.all()
-        return Response({'posts': queryset})
+
 
 class PostRetrieveDestroy(generics.RetrieveDestroyAPIView):
     queryset = Post.objects.all() # 쿼리셋 설정해줘야하고
@@ -45,3 +38,15 @@ class PostRetrieveDestroy(generics.RetrieveDestroyAPIView):
             return self.destroy(request, *args, **kwargs)
         else:
             raise ValidationError('This isn\'t your post to delete!')
+    
+class SearchList(generics.ListAPIView):
+    
+    serializer_class = PostSerializer # 시리얼라이저 클래스 설정해줘야함
+
+    # 권한있는지 확인하는 permission_class(로그아웃 상태로는 list볼 수 있지만 create는 불가능)
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        
+        username = self.kwargs['username']
+        return Post.objects.filter(poster__username=username)   
