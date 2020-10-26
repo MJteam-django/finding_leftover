@@ -26,9 +26,9 @@
         function button1_click() {
             var param;
 
-            param = "{% url 'store-list' %}"
-
+            param = document.getElementById("searchword").value;
             window.location.href = param;
+
         }
         </script>
     <ul id="result"></ul>

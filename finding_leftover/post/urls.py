@@ -6,5 +6,6 @@ urlpatterns = [
     path('list/', views.PostListAPIView.as_view(), name="post-list"),
     path('list/<int:pk>', views.PostDetailAPIView.as_view(), name="post-detail"),
     # re_path('^list/search/(?P<username>.+)/$', views.SearchList.as_view()), 
-    path("storelist/", views.StoreListAPI.as_view(), name="store-list"), #모든 식당의 리스트 + 원하는 식당이름 검색
+    path("storelist/", views.StoreListAPI.as_view()), 
+    path("storelist/<str:storename>/", views.SearchStoreList.as_view()), 
 ]
