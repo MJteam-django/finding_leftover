@@ -13,26 +13,24 @@
   <br><br>
 
 
-<div class="card_box" id="video-box" align="center">
-    <div class="card-deck">
-    {% for post in posts %}
-      <div class="card">
-        <img class="card-img-top" src="https://media.istockphoto.com/photos/square-backgroundslight-monochrome-texture-backgroundblank-old-picture-id1135819052" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><a href="">{{ post.title }}</a></h5>
-          <p class="card-text">{{ post.memo }}</p>
-          <p class="card-text"><small class="text-muted">{{ post.restaurant }}</small></p>
-          <p class="card-text"><small class="text-muted">{{ post.created }}</small></p>
-          
-        </div>
+<br>
+<br>
+
+<div class="card-columns">
+  {% for post in posts %}
+  <div class="card">
+      <img class="card-img-top"
+          src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+          alt="Card image cap">
+      <div class="card-body">
+          <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
+          <p class="card-text">{{ post.memo }}</p></p>
       </div>
-    {% endfor %}
-    </div>
+  </div>
+  {% endfor %}
+  
 </div>
 
-<div>
-  <p>
 
-  </p>
-</div>
+
 {% endblock %}
