@@ -25,29 +25,13 @@ class PostDetailAPIView(APIView):
 
 
 class StoreListAPI(ListAPIView):
-    queryset = Store.objects.all()
     serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'store_list.html'
 
-#    filter_backends = [SearchFilter]
-#    search_fields = ['store_name']
-
     def get(self, request):
         queryset = Store.objects.all()
-        return Response({'stores': queryset})
-        
-
-class SearchStoreList(ListAPIView):
-    serializer_class = StoreSerializer
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'store_searched_list.html'
-
-    def get_queryset(self):
-        name = self.kwargs['storename']
-        return Store.objects.filter(store_name=name) 
-    def get(self, request, storename):
-        name = self.kwargs['storename']
-        queryset = Store.objects.filter(store_name=name) 
- #       queryset = Store.objects.all()
-        return Response({'stores': queryset,'name':name})        
+        storename = self.request.query_params.get('searchword', None)
+        if storename is not None:
+            queryset = queryset.filter(store_name__icontains=storename)
+        return Response({'stores': queryset})    

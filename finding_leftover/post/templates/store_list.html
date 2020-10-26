@@ -3,6 +3,14 @@
 {% block content %}
 
     <h1>Stores</h1>
+    <br/>
+    <div class ="search">
+        <form action="" method="get">
+            <input type="text" name="searchword" placeholder="가게명을 입력하세요." onkeyup="search(this);">
+            <button type="submit">Search</button> 
+        </form>
+    </div>
+    <br/>
     <div class="card-columns">
         {% for store in stores %}
         <div class="card">
@@ -18,21 +26,7 @@
         
     </div>
  
-    </ul>
 
-    <input type = "text" id="searchword" placeholder="가게명을 입력하세요." onkeyup="search(this);">
-    <button type="button" id="btn_search" onclick="button1_click();">Search</button> 
-    <script>
-        function button1_click() {
-            var param;
-
-            param = document.getElementById("searchword").value;
-            window.location.href = param;
-
-        }
-        </script>
-    <ul id="result"></ul>
-    
 
 
 {% endblock %}
