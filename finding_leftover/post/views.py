@@ -3,8 +3,8 @@ from rest_framework import generics, permissions, mixins, status # rest 프레�
 from rest_framework.exceptions import ValidationError #exceptions 가져오기
 from rest_framework.response import Response # delete할 때 필요한 리스폰스 가져오기
 # permissions 가져와서 권한있는 사용자 구분
-from .models import Post
-from .serializers import PostSerializer # PostSerializer 가져오기
+from .models import Post, Store
+from .serializers import PostSerializer,StoreSerializer # PostSerializer 가져오기
 
 # rendering html
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -50,3 +50,19 @@ class SearchList(generics.ListAPIView):
         
         username = self.kwargs['username']
         return Post.objects.filter(poster__username=username)   
+
+
+class StoreListAPI(generics.ListAPIView):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer
+    #profile(가게)의 전체 조회이기때문에 권한 클래스 따로 필요없음 
+    #ListAPIView기때문에 create안함 create는 회원가입시 한번만 한다.
+    #가게에 대한 조회는 post가아닌 profile로 하는 게 좋을 것이라 생각함.
+
+class SearchStoreList(generics.ListAPIView):
+    serializer_class = StoreSerializer
+
+    def get_queryset(self):
+        name = self.kwargs['storename']
+        return Store.objects.filter(store_name=name) 
+
