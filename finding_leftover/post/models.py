@@ -18,4 +18,6 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created']
+
+#pull request시험
     
