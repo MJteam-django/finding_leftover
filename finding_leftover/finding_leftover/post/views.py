@@ -20,3 +20,6 @@ class PostDetailAPIView(APIView):
     def get(self, request, pk):
         queryset = Post.objects.get(pk=pk)
         return Response({'post': queryset})
+
+class Postmethodprac(APIView):
+    
