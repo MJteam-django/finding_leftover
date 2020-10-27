@@ -30,10 +30,11 @@ class Store(models.Model):
     #sotre_image = models.ImageField(default='media/default.jpg')
     store_memo = models.TextField(null=True, blank=True)
 
-#User가 생성될때 같이 Profile도 만들어라
+# User가 생성될때 같이 Profile도 만들어라
 @receiver(post_save, sender=User)
 def create_Store(sender, **kwargs):
     user = kwargs["instance"]
     if kwargs["created"]:
         user_store = Store(user=user)
         user_store.save()
+
