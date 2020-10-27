@@ -1,20 +1,32 @@
-<html>
-<head>
+{% extends 'layout.html' %}
 
-</head>
-<body>
+{% block content %}
+
     <h1>Stores</h1>
-    <ul>
+    <br/>
+    <div class ="search">
+        <form action="" method="get">
+            <input type="text" name="searchword" placeholder="가게명을 입력하세요." onkeyup="search(this);">
+            <button type="submit">Search</button> 
+        </form>
+    </div>
+    <br/>
+    <div class="card-columns">
         {% for store in stores %}
-        <li>{{ store.user }}</li>
-        <li>{{ store.store_name }}</li>
-        <br>
+        <div class="card">
+            <img class="card-img-top"
+                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><a href="#">{{ store.store_name }}</a></h5>
+                <p class="card-text">{{ store.user }}</p></p>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+        
+    </div>
+ 
 
-    <input type = "text" id="searchword" placeholder="가게명을 입력하세요." onkeyup="search(this);"><button type="button" id="btn_search">Search</button> 
-    <ul id="result"></ul>
-    
-</body>
 
-</html>
+
+{% endblock %}

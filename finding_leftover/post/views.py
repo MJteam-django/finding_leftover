@@ -1,8 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
-from .models import Post
-from .serializers import PostSerializer
+from rest_framework.generics import ListAPIView
+from .models import Post, Store
+from .serializers import PostSerializer, StoreSerializer
+from rest_framework.filters import SearchFilter
 
 # 포스팅 목록 및 새 포스팅 작성
 class PostListAPIView(APIView):
@@ -20,3 +22,16 @@ class PostDetailAPIView(APIView):
     def get(self, request, pk):
         queryset = Post.objects.get(pk=pk)
         return Response({'post': queryset})
+
+
+class StoreListAPI(ListAPIView):
+    serializer_class = StoreSerializer
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'store_list.html'
+
+    def get(self, request):
+        queryset = Store.objects.all()
+        storename = self.request.query_params.get('searchword', None)
+        if storename is not None:
+            queryset = queryset.filter(store_name__icontains=storename)
+        return Response({'stores': queryset})    

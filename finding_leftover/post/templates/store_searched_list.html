@@ -1,10 +1,27 @@
+{% extends 'layout.html' %}
 
-<body>
-    <h1>Stores</h1>
-    <ul>
+{% block content %}
+
+    <h3>' {{ name }} '의 검색 결과입니다</h3>
+    <br/>
+    <br/>
+    <div class="card-columns">
         {% for store in stores %}
-        <li>{{ store.user }}</li>
-        <li>{{ store.store_name }}</li>
-        <br>
+        <div class="card">
+            <img class="card-img-top"
+                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><a href="#">{{ store.store_name }}</a></h5>
+                <p class="card-text">{{ store.user }}</p></p>
+            </div>
+        </div>
         {% endfor %}
+        
+    </div>
+ 
     </ul>
+    
+
+
+{% endblock %}
