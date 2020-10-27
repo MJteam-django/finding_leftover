@@ -21,7 +21,8 @@ class PostDetailAPIView(APIView):
 
     def get(self, request, pk):
         queryset = Post.objects.get(pk=pk)
-        return Response({'post': queryset})
+        discount = int(100 / (queryset.origin_price / queryset.new_price))
+        return Response({'post': queryset, 'discount':discount})
 
 
 class StoreListAPI(ListAPIView):

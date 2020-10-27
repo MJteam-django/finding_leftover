@@ -1,13 +1,44 @@
-<body>
-    <h2>
-        ( 사진 )<br>
-    {{ post.title }}<br>
-    {{ post.restaurant }}<br>
-    {{ post.memo}}<br>
-    {{ post.origin_price }}<br>
-    {{ post.new_price }}<br>
+{% extends 'layout.html' %}
 
-    할인율 : 
+{% block content %}
+<body>
+    <table width="100%" height="100%" style="border:10">
+    <tr>
+        <td width="50%" style="border:10">
+            <img class="card-img-detail"
+          src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+          alt="Card image cap">
+        </td>
+        <td style="border:10">
+            <h2>{{ post.title }}</h2><hr>
+            <p>
+                가게명 : {{ post.restaurant }}<br>
+                <br>
+                <p style='text-decoration:line-through'>원가 : {{ post.origin_price }}<br></p>
+                <p>
+                    할인가 : {{ post.new_price }}<br>
+                    <br>
+                    {{ discount }} % 할인
+                </p>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center;"><br>
+            <hr>
+        <h4>{{ post.memo }}<br></h4>
+        </td>
+    </tr>
+    
+    
+</table>
+    <h2>
+        <br>
+    <br>
+    
+
+    
 </h3>
     
 </body>
+{% endblock %}
