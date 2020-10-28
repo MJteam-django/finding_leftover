@@ -58,12 +58,12 @@ def login(request):
     else:
         return render(request, 'login.html')
 
-# 로그 아웃 미완
+# 로그 아웃
 def logout(request):
     # logout으로 POST 요청이 들어왔을 때, 로그아웃 절차를 밟는다.
     if request.method == 'POST':
         auth.logout(request)
-        return redirect('/')
+        return redirect('/posts/list/')
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
-    return render(request, 'login.html')
+    return render(request, 'logout.html')

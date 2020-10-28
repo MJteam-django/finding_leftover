@@ -1,14 +1,22 @@
 {% extends 'layout.html' %}
 
+
 {% block content %}
 <div class="index">
-  로그인 확인 : {{ user.username }}님 반갑습니다
+  
   <div class="jumbotron jumbotron-fluid1" align="center">
     <div class="container">
       <h1 class="display-4"><b>우리 동네 음식점에서 남은 식자재 찾기</b></h1><br>
-      <button type="button" class="btn btn-primary">회원가입</button>
-      <button type="button" class="btn btn-primary">로그인</button>
 
+      {% if user.is_authenticated %}
+      {{ user.username }}님 반갑습니다<br><br>
+      <button type="button" class="btn btn-primary" onclick="location.href='/account/logout'">로그아웃</button>
+      {% else%}
+      
+      <button type="button" class="btn btn-primary" onclick="location.href='/account/signup'">회원가입</button>
+      <button type="button" class="btn btn-primary" onclick="location.href='/account/login'">로그인</button>
+      {% endif %}
+      
     </div>
   </div>
   <br><br>
