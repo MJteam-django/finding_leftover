@@ -8,5 +8,7 @@ urlpatterns = [
     # re_path('^list/search/(?P<username>.+)/$', views.SearchList.as_view()), 
     path("storelist/", views.StoreListAPI.as_view(), name='store-list'),
     path('store/<int:pk>', views.StoreDetailAPIView.as_view(), name="store-detail"),
- 
+    path('posting/', views.PostCreateAPIView.as_view(), name="posting"), 
+    path('posting/<int:pk>', views.PostUpdateAPIView.as_view(), name="post-update"),
+
 ]
