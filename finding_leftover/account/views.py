@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 # Create your views here.
 
-# 회원 가입
+# 회원 가입 완
 def signup(request):
     # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
     if request.method == 'POST':
@@ -34,7 +34,7 @@ def signup(request):
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
     return render(request, 'signup.html')
 
-# 로그인
+# 로그인 완
 def login(request):
     # login으로 POST 요청이 들어왔을 때, 로그인 절차를 밟는다.
     if request.method == 'POST':
@@ -49,7 +49,7 @@ def login(request):
         if user is not None:
             # 로그인 한다
             auth.login(request, user)
-            return redirect('/')
+            return redirect('/posts/list/')
         # 존재하지 않는다면
         else:
             # 딕셔너리에 에러메세지를 전달하고 다시 login.html 화면으로 돌아간다.
@@ -58,7 +58,7 @@ def login(request):
     else:
         return render(request, 'login.html')
 
-# 로그 아웃
+# 로그 아웃 미완
 def logout(request):
     # logout으로 POST 요청이 들어왔을 때, 로그아웃 절차를 밟는다.
     if request.method == 'POST':
