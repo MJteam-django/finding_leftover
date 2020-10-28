@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <p>username</p>
+        <input type="text" name="username">
+        <br>
+        <p>password</p>
+        <input type="text" name="password">
+        <br>
+        <p>confirm</p>
+        <input type="text" name="confirm">
+        <br>
+        <p>store_name</p>
+        <input type="text" name="store_name">
+        <p>store_adress</p>
+        <input type="text" name="store_adress">
+        <p>store_memo</p>
+        <input type="text" name="store_memo">
+        
+        <input type="submit" value="회원가입">
+    </form>
+</body>
+</html>

@@ -2,11 +2,12 @@
 
 {% block content %}
 <div class="index">
-
+  로그인 확인 : {{ user.username }}님 반갑습니다
   <div class="jumbotron jumbotron-fluid1" align="center">
     <div class="container">
-      <h1 class="display-4"><b>우리 동네 음식점에서 남은 식자재 찾기</b></h1>
-      <p class="middle"><b>MJteam</b></p>
+      <h1 class="display-4"><b>우리 동네 음식점에서 남은 식자재 찾기</b></h1><br>
+      <button type="button" class="btn btn-primary">회원가입</button>
+      <button type="button" class="btn btn-primary">로그인</button>
 
     </div>
   </div>
@@ -28,8 +29,8 @@
       </div>
   </div>
   {% endfor %}
-  
 </div>
+
 
 
 
