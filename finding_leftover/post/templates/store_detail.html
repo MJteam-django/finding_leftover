@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'post/store.css'%}" />
+
+<div class="wrap">
+    <div class="content">
+        <div class="aside">
+            <div>
+                <img class ="img-store" src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                alt="store">
+            </div>
+            
+            <div>
+                <h3>{{store.store_name}}</h3>
+            </div>
+            <p>위치 : {{store.store_adress}}</p>
+            <p>{{store.store_memo}}</p>
+            
+
+        </div>
+        <div class=main>
+            <div class = "row justify-content-between" style="margin-left: 1rem; margin-top:1rem;">
+                <div class = "col-4"><strong>판매글</strong></div>
+                <div class="col-2"><button type="button" class="btn btn-outline-primary">글쓰기</button></div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3" style="margin:2rem">
+                {% for post in posts %}
+                <div class="col mb-4">
+                    <div class="card" style="width: 13rem;">
+                        <img class="card-img-top" src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg" 
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <p><h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5></p>
+                            <p class="card-text"><b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

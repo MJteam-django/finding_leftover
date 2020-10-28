@@ -13,7 +13,8 @@ class Post(models.Model):
     soldout = models.BooleanField(default=False)
     origin_price = models.IntegerField(default=0)
     new_price = models.IntegerField(default=0)
-    poster = models.ForeignKey(User, on_delete=models.CASCADE)
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post')
+    #해당 User의 모든 posts를 모두 가져오고 싶을때 사용할 ORM은 post=user.post.all()
 
     def __str__(self):
         return self.title
