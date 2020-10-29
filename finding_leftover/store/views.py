@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
 # 식당 검색
-class StoreListAPI(ListAPIView):
+class StorenameListAPI(ListAPIView):
     serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'store_list.html'
@@ -23,6 +23,20 @@ class StoreListAPI(ListAPIView):
         if storename is not None:
             queryset = queryset.filter(store_name__icontains=storename)
         return Response({'stores': queryset})
+
+class StorelocalListAPI(ListAPIView):
+    serializer_class = StoreSerializer
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'store_local_list.html'
+
+    def get(self, request):
+        # 검색을 아직하지않은 첫화면일때는 모든 store보여준다.
+        queryset = Store.objects.all()
+        local = request.query_params.get('searchword', None)
+        # 검색을 했을때는 queryset을 필터링해준다.
+        if local is not None:
+            queryset = queryset.filter(store_adress__icontains=local)
+        return Response({'stores': queryset, 'local':local})
 
 # 식당의 상세 페이지
 class StoreDetailAPIView(APIView):
