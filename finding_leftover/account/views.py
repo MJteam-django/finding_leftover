@@ -30,7 +30,7 @@ def signup(request):
             store.save()
             # 로그인 한다
             auth.login(request, user)
-            return redirect('/posts/list/')
+            return redirect('post-list')
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
     return render(request, 'signup.html')
 
@@ -49,7 +49,7 @@ def login(request):
         if user is not None:
             # 로그인 한다
             auth.login(request, user)
-            return redirect('/posts/list/')
+            return redirect('post-list')
         # 존재하지 않는다면
         else:
             # 딕셔너리에 에러메세지를 전달하고 다시 login.html 화면으로 돌아간다.
@@ -63,7 +63,7 @@ def logout(request):
     # logout으로 POST 요청이 들어왔을 때, 로그아웃 절차를 밟는다.
     if request.method == 'POST':
         auth.logout(request)
-        return redirect('/posts/list/')
+        return redirect('post-list')
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, 'logout.html')

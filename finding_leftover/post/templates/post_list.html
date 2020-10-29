@@ -10,7 +10,7 @@
 
       {% if user.is_authenticated %}
       {{ user.username }}님 반갑습니다<br><br>
-      <button type="button" class="btn btn-primary" onclick="location.href='/account/logout'">로그아웃</button>
+      <button type="button" class="btn btn-primary" onclick=logout()>로그아웃</button>
       {% else%}
       
       <button type="button" class="btn btn-primary" onclick="location.href='/account/signup'">회원가입</button>
@@ -38,7 +38,11 @@
   </div>
   {% endfor %}
 </div>
-
+<script type="text/javascript">
+  function logout(){
+      window.location.href = "{% url 'logout' %}"
+  }
+  </script>
 
 
 
