@@ -2,7 +2,7 @@
 Finding Leftover Ingredients at Local Restaurants
 
 
-pip install django
+pip install django <br>
 pip install djangorestframework
 pip install django-betterforms
 
