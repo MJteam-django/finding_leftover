@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% load rest_framework %}
+
+<form action="{% url 'post-update' pk=post.pk %}" method="POST">
+    {% csrf_token %}
+    {% render_form serializer template_pack='rest_framework/vertical'%}
+    <input type="submit" value="수정">
+
+</form>
+<form action='' method='POST'>
+    <button>삭제</button>
+    <input type="hidden" name='_METHOD' value="DELETE">
+</form>
+
+{% endblock %}
