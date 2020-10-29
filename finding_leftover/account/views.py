@@ -1,12 +1,3 @@
-
-from rest_framework.response import Response
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
-from post.models import Post, Store
-from post.serializers import PostSerializer, StoreSerializer
-from rest_framework.filters import SearchFilter
-
 from django.http import HttpResponse
 
 from django.shortcuts import render, redirect
@@ -16,18 +7,21 @@ from django.contrib import auth
 from .forms import UserCreationMultiForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
-# Create your views here.
+
+
+# 회원가입을 위한 function입니다. 
 def signup(request):
     if request.method == "POST":
         form = UserCreationMultiForm(request.POST)
-
+        # form이 유효한지 확인한 후에 create_user로 new_user생성(이 부분에서 username을 찾을 수 없다고 에러 발생합니다)
+        username = request.POST['username']
         if form.is_valid():
             new_user = User.objects.create_user(**form.cleaned_data)
             auth_login(request, new_user)
             return redirect('post-list')
-        else:
+        else: # 유효하지 않으면 이미 존재하는 사용자 메세지 반환
             return HttpResponse('이미 존재하는 사용자입니다.')
-    else:
+    else: # get요청 들어오면 signup.html 띄워주기
         form = UserCreationMultiForm()
         return render(request, 'signup.html', {'form':form})
 
