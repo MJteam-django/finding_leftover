@@ -24,7 +24,7 @@
         <div class=main>
             <div class = "row justify-content-between" style="margin-left: 1rem; margin-top:1rem;">
                 <div class = "col-4"><strong>판매글</strong></div>
-                <div class="col-2"><button type="button" class="btn btn-outline-primary">글쓰기</button></div>
+                <div class="col-2"><button type="button" class="btn btn-outline-primary" onclick = posting();>글쓰기</button></div>
             </div>
             <div class="row row-cols-1 row-cols-md-3" style="margin:2rem">
                 {% for post in posts %}
@@ -43,5 +43,9 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+function posting(){
+    window.location.href = "{% url 'posting' %}"
+}
+</script>
 {% endblock %}
