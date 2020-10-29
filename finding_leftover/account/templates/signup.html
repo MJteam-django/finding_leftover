@@ -6,9 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="{% url 'signup' %}">
+
+    
+     <form method="POST" action="{% url 'signup' %}">
         {% csrf_token %}
-        <p>username</p>
+        {{form.as_p}}
+    <!--    <p>username</p>
         <input type="text" name="username">
         <br>
         <p>password</p>
@@ -22,9 +25,9 @@
         <p>store_adress</p>
         <input type="text" name="store_adress">
         <p>store_memo</p>
-        <input type="text" name="store_memo">
+        <input type="text" name="store_memo">-->
         <br><br>
         <input type="submit" value="회원가입">
-    </form>
+    </form> 
 </body>
 </html>

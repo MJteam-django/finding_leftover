@@ -7,12 +7,43 @@ from post.models import Post, Store
 from post.serializers import PostSerializer, StoreSerializer
 from rest_framework.filters import SearchFilter
 
+from django.http import HttpResponse
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-# Create your views here.
 
-# 회원 가입 완
+from .forms import UserCreationMultiForm, LoginForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login
+# Create your views here.
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationMultiForm(request.POST)
+
+        if form.is_valid():
+            new_user = User.objects.create_user(**form.cleaned_data)
+            auth_login(request, new_user)
+            return redirect('post-list')
+        else:
+            return HttpResponse('이미 존재하는 사용자입니다.')
+    else:
+        form = UserCreationMultiForm()
+        return render(request, 'signup.html', {'form':form})
+
+def login(request):
+    if request.method == 'POST':
+        login_form = AuthenticationForm(request, request.POST)
+        if login_form.is_valid():
+            auth_login(request, login_form.get_user())
+        return redirect('post-list')
+    
+    else:
+        login_form = AuthenticationForm()
+    
+    return render(request, 'login.html', {'login_form' : login_form})
+'''
+회원 가입 완
 def signup(request):
     # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
     if request.method == 'POST':
@@ -33,8 +64,9 @@ def signup(request):
             return redirect('post-list')
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
     return render(request, 'signup.html')
-
+'''
 # 로그인 완
+'''
 def login(request):
     # login으로 POST 요청이 들어왔을 때, 로그인 절차를 밟는다.
     if request.method == 'POST':
@@ -57,7 +89,7 @@ def login(request):
     # login으로 GET 요청이 들어왔을때, 로그인 화면을 띄워준다.
     else:
         return render(request, 'login.html')
-
+'''
 # 로그 아웃
 def logout(request):
     # logout으로 POST 요청이 들어왔을 때, 로그아웃 절차를 밟는다.
