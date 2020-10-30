@@ -33,7 +33,7 @@
           alt="Card image cap">
       <div class="card-body">
           <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
-          <p class="card-text">{{ post.memo }}</p></p>
+          <div class="card-text"><a href="{% url 'store-detail' pk=post.poster.pk%}">{{ post.restaurant }}</a></div></p>
       </div>
   </div>
   {% endfor %}

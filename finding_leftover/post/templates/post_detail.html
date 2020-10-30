@@ -10,9 +10,9 @@
           alt="Card image cap">
         </td>
         <td style="border:10">
-            <h2>{{ post.title }}</h2> <button type="button" class="btn btn-outline-primary" onclick = postUpdate();>편집</button><hr>
+            <h2>{{ post.title }}</h2> <hr>
             <p>
-                가게명 : {{ post.restaurant }}<br>
+                가게명 : <a href="{% url 'store-detail' pk=post.poster.pk%}">{{ post.restaurant }}</a><br>
                 <br>
                 <p style='text-decoration:line-through'>원가 : {{ post.origin_price }}<br></p>
                 <p>
@@ -42,10 +42,5 @@
     
 </body>
 
-<script type="text/javascript">
-    function postUpdate(){
-        window.location.href = "{% url 'post-update' post.id %}"
-    }
-    </script>
 
 {% endblock %}
