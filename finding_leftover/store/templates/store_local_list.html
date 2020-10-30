@@ -1,9 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
-    <h3>' {{ name }} '의 검색 결과입니다</h3>
+    {% if local %}
+    <h1>Stores in {{ local }}</h1>
+    {% else %}
+    <h1>Local</h1>
+    {% endif %}
+    
     <br/>
+    <div class ="search">
+        <form action="" method="get">
+            <input type="text" name="searchword" placeholder="ex) 마포구" onkeyup="search(this);">
+            <button type="submit">Search</button> 
+        </form>
+    </div>
     <br/>
     <div class="card-columns">
         {% for store in stores %}
@@ -12,7 +22,7 @@
                 src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
                 alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title"><a href="#">{{ store.store_name }}</a></h5>
+                <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}">{{ store.store_name }}</a></h5>
                 <p class="card-text">{{ store.user }}</p></p>
             </div>
         </div>
@@ -20,8 +30,7 @@
         
     </div>
  
-    </ul>
-    
+
 
 
 {% endblock %}

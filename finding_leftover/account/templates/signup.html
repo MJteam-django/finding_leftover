@@ -6,25 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="{% url 'signup' %}">
+    <!-- form을 사용자에게 보여주고 정보를 받아옵니다 -->
+     <form method="POST" action="{% url 'signup' %}">
         {% csrf_token %}
-        <p>username</p>
-        <input type="text" name="username">
-        <br>
-        <p>password</p>
-        <input type="text" name="password">
-        <br>
-        <p>confirm</p>
-        <input type="text" name="confirm">
-        <br>
-        <p>store_name</p>
-        <input type="text" name="store_name">
-        <p>store_adress</p>
-        <input type="text" name="store_adress">
-        <p>store_memo</p>
-        <input type="text" name="store_memo">
-        
+        {{form.as_p}}
+        <br><br>
         <input type="submit" value="회원가입">
-    </form>
+    </form> 
 </body>
 </html>

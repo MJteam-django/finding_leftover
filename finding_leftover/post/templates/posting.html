@@ -5,7 +5,7 @@
 {% load rest_framework %}
 
 
-<form action="{% url 'posting' %}" method="post">
+<form action="{% url 'post-create' %}" method="post">
     {% csrf_token %}
     {% render_form serializer template_pack='rest_framework/vertical' %}
     <button type="submit" class="btn btn-default">posting</button>
