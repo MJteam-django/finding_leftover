@@ -6,8 +6,8 @@
     <tr>
         <td width="50%" style="border:10; text-align: center;" >
             <img class="card-img-detail"
-          src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-          alt="Card image cap">
+          src="{{ post.image.url|slice:'1:' }}"
+          alt="Card image cap" style="width:500px; height: 500px;"> <!-- 모든 이미지는 500*500으로 업로드해주세요-->
         </td>
         <td style="border:10">
             <h2>{{ post.title }}</h2> <hr>
