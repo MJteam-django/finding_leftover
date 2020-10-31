@@ -2,6 +2,9 @@
 
 
 {% block content %}
+
+
+
 <div class="index">
   
   <div class="jumbotron jumbotron-fluid1" align="center">
@@ -27,9 +30,15 @@
 
 <div class="card-columns">
   {% for post in posts %}
+  
+  <!-- 이미지 url을 받을 수 있는지 확인하기 위해서 출력해보았습니다.
+  {{ post.image.path }}
+  {{ post.image.url }} -->
+  
+  <!-- img 태그를 활용하여 프로젝트의 root 파일에 있는 media폴더 내부의 파일의 url을 반환합니다. -->
   <div class="card">
       <img class="card-img-top"
-          src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+           src = "{{ post.image.url }}" 
           alt="Card image cap">
       <div class="card-body">
           <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>

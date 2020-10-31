@@ -6,7 +6,7 @@ from django.dispatch import receiver
 class Post(models.Model):
     restaurant = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    #image = models.ImageField(default='media/default.jpg')
+    image = models.ImageField(upload_to='post', default='')
     memo = models.TextField(blank=True)
     local = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)

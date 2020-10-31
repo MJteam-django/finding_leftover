@@ -9,13 +9,10 @@ class PostSerializer(serializers.ModelSerializer):
     poster = serializers.ReadOnlyField(source='poster.username')
     restaurant = serializers.ReadOnlyField(source='poster.store.store_name')
     local = serializers.ReadOnlyField(source='poster.store.store_adress')
-
     class Meta:
         model = Post
         # 포스트 모델에서 가져올 필드 정하기 id는 자동생성
-        fields = ['id', 'restaurant', 'title', 'memo', 
-                'local', 'soldout', 'poster', 'created', 
-                'origin_price', 'new_price']
+        fields = '__all__'
 
 
 class StoreSerializer(serializers.ModelSerializer):
