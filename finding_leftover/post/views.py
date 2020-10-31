@@ -52,7 +52,7 @@ class PostCreateAPIView(CreateAPIView):
         if not serializer.is_valid():
             return Response({'serializer': serializer})
         user=self.request.user
-        serializer.save(poster=user,restaurant=user.store.store_name,local=user.store.store_adress) 
+        serializer.save(poster=user,restaurant=user.store.store_name,local=user.store.store_address) 
         # perform_create()가 serializer.save()를 해줌
         return redirect('post-list') 
 

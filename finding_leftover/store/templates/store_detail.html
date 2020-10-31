@@ -8,15 +8,22 @@
 <div class="wrap">
     <div class="content">
         <div class="aside">
+            {% if store %}
+            {{ store.store_name }}<br>
+            {{ store.store_address }}<br>
+            {{ store.store_image.url }}<br>
+            {{ store.store_memo }}<br>
+            {% endif %}
+            
             <div>
-                <img class ="img-store rounded-circle" src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                <img class ="img-store rounded-circle" src="{{ store.store_image.url|slice:'1:' }}"
                 alt="store">
             </div>
             
             <div>
                 <h3>{{store.store_name}}</h3>
             </div>
-            <p>위치 : {{store.store_adress}}</p>
+            <p>위치 : {{store.store_address}}</p>
             <p>{{store.store_memo}}</p>
             
 
@@ -32,7 +39,7 @@
                 {% for post in posts %}
                 <div class="col mb-4">
                     <div class="card" style="width: 13rem;">
-                        <img class="card-img-top" src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg" 
+                        <img class="card-img-top" src="{{ post.image.url|slice:'1:' }}" 
                             alt="Card image cap">
                         <div class="card-body">
                             <div class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5></div>

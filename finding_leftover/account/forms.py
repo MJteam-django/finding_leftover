@@ -38,18 +38,8 @@ class CreateUserForm(UserCreationForm):
 class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
-        fields = ('store_name', 'store_adress', 'store_memo')
-        widgets = {
-            'store_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'store_adress': forms.TextInput(attrs={'class': 'form-control'}),
-            'store_memo': forms.TextInput(attrs={'class': 'form-control'}),
-        }
-
-        labels = {
-            'store_name': '가게이름',
-            'store_adress': '가게주소',
-            'store_memo': '가게 소개',
-        }
+        fields = ('store_name', 'store_address', 'store_memo', 'store_image')
+        
 
 # CreateUserForm과 StoreForm을 합치기 위해서 MultimodelForm을 사용했습니다
 class UserCreationMultiForm(MultiModelForm):

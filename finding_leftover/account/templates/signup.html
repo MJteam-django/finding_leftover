@@ -7,9 +7,32 @@
 </head>
 <body>
     <!-- form을 사용자에게 보여주고 정보를 받아옵니다 -->
-     <form method="POST" action="{% url 'signup' %}">
+     <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
+        
+        <!-- {{form.as_p}} -->
+        <p>username</p>
+        <input type="text" name="username">
+        <br>
+        <p>password</p>
+        <input type="text" name="password">
+        <br>
+        <p>confirm</p>
+        <input type="text" name="confirm">
+        <p>stor name</p>
+        <input type="text" name="store_name">
+        <br>
+        <p>store address</p>
+        <input type="text" name="store_address">
+        <br>
+        <p>store memo</p>
+        <input type="text" name="store_memo">
+        <br>
+        <p>store image</p>
+        <input type="file" name="store_image">
+
+
+
         <br><br>
         <input type="submit" value="회원가입">
     </form> 
