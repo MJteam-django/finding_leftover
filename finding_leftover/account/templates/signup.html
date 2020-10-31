@@ -10,7 +10,8 @@
      <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
         
-        <!-- {{form.as_p}} -->
+        {{form.as_p}}
+        <!--
         <p>username</p>
         <input type="text" name="username">
         <br>
@@ -19,7 +20,7 @@
         <br>
         <p>confirm</p>
         <input type="text" name="confirm">
-        <p>stor name</p>
+        <p>store name</p>
         <input type="text" name="store_name">
         <br>
         <p>store address</p>
@@ -29,9 +30,7 @@
         <input type="text" name="store_memo">
         <br>
         <p>store image</p>
-        <input type="file" name="store_image">
-
-
+        <input type="file" name="store_image"> -->
 
         <br><br>
         <input type="submit" value="회원가입">
