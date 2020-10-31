@@ -6,7 +6,7 @@ from django.dispatch import receiver
 class Post(models.Model):
     restaurant = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='post', default='')
+    image = models.ImageField(upload_to='post', default='') #사용자에게 이미지 파일을 입력받아 화면에 띄우고 싶습니다.
     memo = models.TextField(blank=True)
     local = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
