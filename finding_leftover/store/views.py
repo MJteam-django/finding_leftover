@@ -9,11 +9,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
-# 식당 검색
+# 식당 이름으로 검색
 class StorenameListAPI(ListAPIView):
     serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'store_list.html'
+    template_name = 'store_name_list.html'
 
     def get(self, request):
         # 검색을 아직하지않은 첫화면일때는 모든 store보여준다.
@@ -24,6 +24,7 @@ class StorenameListAPI(ListAPIView):
             queryset = queryset.filter(store_name__icontains=storename)
         return Response({'stores': queryset})
 
+# 식당 지역으로 검색
 class StorelocalListAPI(ListAPIView):
     serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
@@ -38,7 +39,7 @@ class StorelocalListAPI(ListAPIView):
             queryset = queryset.filter(store_adress__icontains=local)
         return Response({'stores': queryset, 'local':local})
 
-# 식당의 상세 페이지
+# 식당의 상세 페이지 조회
 class StoreDetailAPIView(APIView):
     serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]

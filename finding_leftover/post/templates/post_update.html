@@ -3,16 +3,31 @@
 {% block content %}
 
 {% load rest_framework %}
+<div class="row">
+    <div class="col-6 offset-3">
+        <form action="{% url 'post-update' pk=post.pk %}" method="POST">
+            {% csrf_token %}
+            {% render_form serializer template_pack='rest_framework/vertical'%}
+            <button type="submit" class="btn btn-primary offset-9">수정</button>
+            <button type="button" class ="btn btn-primary" id ="delete">삭제</button>
+        </form>
+     </div>
+</div>
 
-<form action="{% url 'post-update' pk=post.pk %}" method="POST">
-    {% csrf_token %}
-    {% render_form serializer template_pack='rest_framework/vertical'%}
-    <input type="submit" value="수정">
-
-</form>
-<form action='' method='POST'>
-    <button>삭제</button>
-    <input type="hidden" name='_METHOD' value="DELETE">
-</form>
+<script>
+    $('#delete').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url:"{% url 'post-update' pk=post.pk %}",
+            type: "delete",
+            dataType:"json",
+            headers: {'X-CSRFToken': '{{ csrf_token }}'}, // token 설정
+        }).always(function(response){
+            //alert(response["pk"])
+            alert("포스트를 삭제하셨습니다")
+            location.href = "{% url 'post-list' %}";
+        });
+    });
+</script>
 
 {% endblock %}
