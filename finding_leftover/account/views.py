@@ -8,13 +8,38 @@ from .forms import UserCreationMultiForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 
+from post.models import Store
+'''
+#회원 가입 완
+def signup(request):
+    # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
+    if request.method == 'POST':
+        # password와 confirm에 입력된 값이 같다면
+        if request.POST['password'] == request.POST['confirm']:
+            # user 객체를 새로 생성
+            user = User.objects.create_user(
+                username=request.POST['username'], 
+                password=request.POST['password'], 
+                )
+            store_name = request.POST.get("store_name","")
+            store_address = request.POST['store_address']
+            store_memo = request.POST['store_memo']
+            store_image = request.POST.get('store_image',"")
+            store = Store(user=user, store_name=store_name, store_address=store_address, store_memo=store_memo, store_image=store_image)
+            store.save()
+            # 로그인 한다
+            auth.login(request, user)
+            return redirect('post-list')
+    # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
+    return render(request, 'signup.html')
+    '''
 
 # 회원가입을 위한 function입니다. 
 def signup(request):
     if request.method == "POST":
         form = UserCreationMultiForm(request.POST)
         # form이 유효한지 확인한 후에 create_user로 new_user생성(이 부분에서 username을 찾을 수 없다고 에러 발생합니다)
-        username = request.POST['username']
+        # username = request.POST.get('username','')
         if form.is_valid():
             new_user = User.objects.create_user(**form.cleaned_data)
             auth_login(request, new_user)
@@ -36,29 +61,9 @@ def login(request):
         login_form = AuthenticationForm()
     
     return render(request, 'login.html', {'login_form' : login_form})
-'''
-회원 가입 완
-def signup(request):
-    # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
-    if request.method == 'POST':
-        # password와 confirm에 입력된 값이 같다면
-        if request.POST['password'] == request.POST['confirm']:
-            # user 객체를 새로 생성
-            user = User.objects.create_user(
-                username=request.POST['username'], 
-                password=request.POST['password'], 
-                )
-            store_name = request.POST.get("store_name","")
-            store_adress = request.POST['store_adress']
-            store_memo = request.POST['store_memo']
-            store = Store(user=user, store_name=store_name, store_adress=store_adress, store_memo=store_memo)
-            store.save()
-            # 로그인 한다
-            auth.login(request, user)
-            return redirect('post-list')
-    # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
-    return render(request, 'signup.html')
-'''
+
+
+
 # 로그인 완
 '''
 def login(request):

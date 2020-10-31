@@ -6,10 +6,14 @@
 
 <div class="row">
     <div class="col-6 offset-3">
-        <form action="{% url 'post-create' %}" method="post">
+        <form action="{% url 'post-create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% render_form serializer template_pack='rest_framework/vertical' %}
+            <p>
+                모든 이미지는 500*500 으로 업로드해주세요
+            </p>
             <button type="submit" class="btn btn-primary offset-11">등록</button>
+            
         </form>
 
     </div>
