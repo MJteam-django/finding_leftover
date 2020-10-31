@@ -8,8 +8,11 @@ from rest_framework.filters import SearchFilter
 from django.contrib.auth.models import User 
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+import simplejson as json #ajax
+from django.http import HttpResponse
+from rest_framework import status
 
-# 포스팅 목록 및 새 포스팅 작성
+# 포스팅 목록
 class PostListAPIView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_list.html'
@@ -31,49 +34,51 @@ class PostDetailAPIView(APIView):
 
 
 
-# 판매글 작성
+# 포스팅 작성
 class PostCreateAPIView(CreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'posting.html'
+    template_name = 'post_create.html'
 
-    def get(self, request): # get요청시 판매글 작성 폼 보여주기
+    # 포스팅 작성 폼 보여주기
+    def get(self, request): 
         serializer = PostSerializer()
         return Response({'serializer': serializer})
 
-    def post(self, request): # post요청시 판매글을 저장하고 post-list로 가게함
+    # 작성한 포스팅을 저장하고 전체 포스팅 목록으로
+    def post(self, request): 
         serializer = PostSerializer(data=request.data)
         if not serializer.is_valid():
             return Response({'serializer': serializer})
-        serializer.save(poster=self.request.user) 
+        user=self.request.user
+        serializer.save(poster=user,restaurant=user.store.store_name,local=user.store.store_adress) 
         # perform_create()가 serializer.save()를 해줌
         return redirect('post-list') 
 
-    """ 이 코드가 왜 안되는질 모르겠음ㅜㅜ
-    def perform_create(self, serializer):
-        serializer.save(poster=self.request.user)
-        redirect('post-list')
-    """  
-# 판매글의 update와 delete 요청
+
+# 포스팅의 수정과 삭제
 class PostUpdateAPIView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_update.html'
 
+    # 포스팅 수정 폼 보여주기
     def get(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
         serializer = PostSerializer(post)
         return Response({'serializer': serializer, 'post': post})
 
+    # 포스팅을 수정하고 해당 식당 페이지로 이동해서 확인
     def post(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
         serializer = PostSerializer(post, data=request.data)
         if not serializer.is_valid():
             return Response({'serializer': serializer, 'post': post})
         serializer.save()
-        return redirect('post-list')
+        return redirect('store-detail',post.poster.id) 
 
-    def delete(self, request, pk, format=None): #특정 포스팅 삭제
-        post = self.get_object(pk)
+    # 포스팅 삭제
+    def delete(self, request, pk, format=None): 
+        post = get_object_or_404(Post, pk=pk)
         post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return HttpResponse(json.dumps({'pk': pk}), content_type="application/json") 
