@@ -11,14 +11,24 @@ from django.shortcuts import get_object_or_404
 import simplejson as json #ajax
 from django.http import HttpResponse
 from rest_framework import status
+from post.pagination import CustomPagination
 
 # 포스팅 목록
-class PostListAPIView(APIView):
+class PostListAPIView(ListAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_list.html'
+    pagination_class = CustomPagination
 
     def get(self, request):
         queryset = Post.objects.all()
+        
+        # page_size만큼의 post만 보내도록 queryset 재설정
+        self.paginator.page_size_query_param = "page_size"
+        page = self.paginate_queryset(queryset)
+        
+        if page is not None: 
+            mypage = self.paginator.get_html_context() # page에 관련된 정보
+            return Response({'posts' : page, 'mypage' : mypage })
         return Response({'posts': queryset})
 
 class PostDetailAPIView(APIView):

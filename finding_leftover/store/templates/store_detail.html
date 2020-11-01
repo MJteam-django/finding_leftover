@@ -8,13 +8,7 @@
 <div class="wrap">
     <div class="content">
         <div class="aside">
-            {% if store %}
-            {{ store.store_name }}<br>
-            {{ store.store_address }}<br>
-            {{ store.store_image.url }}<br>
-            {{ store.store_memo }}<br>
-            {% endif %}
-            
+
             <div>
                 <img class ="img-store rounded-circle" src="{{ store.store_image.url|slice:'1:' }}"
                 alt="store">
@@ -38,7 +32,7 @@
             <div class="row row-cols-1 row-cols-md-3" style="margin:2rem">
                 {% for post in posts %}
                 <div class="col mb-4">
-                    <div class="card" style="width: 13rem;">
+                    <div class="card" style="width: 12rem;">
                         <img class="card-img-top" src="{{ post.image.url|slice:'1:' }}" 
                             alt="Card image cap">
                         <div class="card-body">
@@ -48,7 +42,7 @@
                                 <input type="hidden" id="new" value="{{post.new_price}}" />
                                 <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small><br/>
                                 <div class="row">
-                                    <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-primary btn-sm offset-md-6">수정</a>
+                                    <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-primary btn-sm offset-md-5">수정</a>
                                         &nbsp;
                                     <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-danger btn-sm btn_comment_delete">삭제</a>
                                 </div>
@@ -58,9 +52,31 @@
                 </div>
                 {% endfor %}
             </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination offset-md-5">
+                  {%if mypage.previous_url%}
+                    <li class="page-item"><a class="page-link" href="{{ mypage.previous_url }}">Prev</a></li>
+                  {%endif%}
+                  
+                  {% for link in mypage.page_links %}
+                    {% if link.is_active %}
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="{{link.url}}">{{link.number}} <span class="sr-only">(current)</span></a>
+                    {%else%}
+                      <li class="page-item"><a class="page-link" href="{{link.url}}">{{link.number}}</a></li>
+                    {% endif %}
+                  {%endfor%}
+              
+                  {%if mypage.next_url%}
+                    <li class="page-item"><a class="page-link" href="{{ mypage.next_url }}">Next</a></li>
+                  {%endif%}
+                </ul>
+            </nav>
+            
         </div>
     </div>
 </div>
+
 <script>
     $('.btn_comment_delete').click(function(e){
         e.preventDefault();
