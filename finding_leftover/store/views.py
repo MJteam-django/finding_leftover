@@ -38,7 +38,7 @@ class StorelocalListAPI(ListAPIView):
         local = request.query_params.get('searchword', None)
         # 검색을 했을때는 queryset을 필터링해준다.
         if local is not None:
-            queryset = queryset.filter(store_adress__icontains=local)
+            queryset = queryset.filter(store_address__icontains=local)
         return Response({'stores': queryset, 'local':local})
 
 # 식당의 상세 페이지 조회
