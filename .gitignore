@@ -152,3 +152,4 @@ cython_debug/
 # media
 finding_leftover/media/post/*.jpg
 finding_leftover/media/store/*.jpg
+*.jpg
