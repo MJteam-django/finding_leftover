@@ -13,7 +13,8 @@
 
       {% if user.is_authenticated %}
       {{ user.username }}님 반갑습니다<br><br>
-      <button type="button" class="btn btn-info" onclick=logout()>로그아웃</button>
+      <button type="button" class="btn btn-primary" onclick=logout()>로그아웃</button>
+      <a href="{% url 'store-detail' pk=user.pk %}" class="btn btn-outline-primary">마이페이지</a>
       {% else%}
       
       <button type="button" class="btn btn-info" onclick="location.href='/account/signup'">회원가입</button>
