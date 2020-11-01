@@ -3,28 +3,20 @@
 
 {% block content %}
 
+{% if local %}
+<h1>Posts in {{ local }}</h1>
+{% else %}
+<h1>Local</h1>
+{% endif %}
 
-
-<div class="index">
-  
-  <div class="jumbotron jumbotron-fluid1" align="center">
-    <div class="container">
-      <h1 class="display-4"><b>우리 동네 음식점에서 남은 식자재 찾기</b></h1><br>
-
-      {% if user.is_authenticated %}
-      {{ user.username }}님 반갑습니다<br><br>
-      <button type="button" class="btn btn-primary" onclick=logout()>로그아웃</button>
-      <a href="{% url 'store-detail' pk=user.pk %}" class="btn btn-outline-primary">마이페이지</a>
-      {% else%}
-      
-      <button type="button" class="btn btn-info" onclick="location.href='/account/signup'">회원가입</button>
-      <button type="button" class="btn btn-info" onclick="location.href='/account/login'">로그인</button>
-      {% endif %}
-      
-    </div>
-  </div>
-  <br><br>
-
+<br/>
+<div class ="search">
+    <form action="" method="get">
+        <input type="text" name="searchword" placeholder="ex) 마포구" onkeyup="search(this);">
+        <button type="submit" class="btn btn-light">Search</button>
+    </form>
+</div>
+<br/>
 
 <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4" style="margin : 1rem;" >
   
@@ -38,10 +30,11 @@
           alt="Card image cap" style="width:100%;">
       <div class="card-body">
         {% if post.soldout %}
-        <h5 class="card-title">SOLD OUT</a></h5>
+        <h5 class="card-title">SOLD OUT</h5>
         {% else %}
           <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
         {% endif %}
+        <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small>
       </div>
     </div>
   </div>
@@ -51,7 +44,7 @@
 </div>
 <!--pagination-->
 <nav aria-label="Page navigation example">
-  <ul class="pagination offset-md-6">
+  <ul class="pagination offset-6">
     {%if mypage.previous_url%}
       <li class="page-item"><a class="page-link" href="{{ mypage.previous_url }}">Prev</a></li>
     {%endif%}
@@ -71,11 +64,6 @@
   </ul>
 </nav>
 
-<script type="text/javascript">
-  function logout(){
-      window.location.href = "{% url 'logout' %}"
-  }
-  </script>
 
 
 

@@ -38,14 +38,18 @@
                         <img class="card-img-top" src="{{ post.image.url|slice:'1:' }}" 
                             alt="Card image cap">
                         <div class="card-body">
-                            <div class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5></div>
+                            <div class="card-title">
+                            {% if post.soldout %}
+                                SOLD OUT
+                            {% else %}
+                                <a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
+                            {% endif %}
+                            </div>
                             <div class="card-text">
-                                <input type="hidden" id="origin" value="{{post.origin_price}}" />
-                                <input type="hidden" id="new" value="{{post.new_price}}" />
                                 <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small><br/>
                                 {% if user.pk == store.pk%}
                                 <div class="row">
-                                    <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-primary btn-sm offset-md-5">수정</a>
+                                    <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-primary btn-sm offset-5">수정</a>
                                         &nbsp;
                                     <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-danger btn-sm btn_comment_delete">삭제</a>
                                 </div>
@@ -57,7 +61,7 @@
                 {% endfor %}
             </div>
             <nav aria-label="Page navigation example">
-                <ul class="pagination offset-md-5">
+                <ul class="pagination offset-5">
                   {%if mypage.previous_url%}
                     <li class="page-item"><a class="page-link" href="{{ mypage.previous_url }}">Prev</a></li>
                   {%endif%}

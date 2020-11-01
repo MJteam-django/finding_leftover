@@ -20,16 +20,22 @@ class PostListAPIView(ListAPIView):
     pagination_class = CustomPagination
 
     def get(self, request):
+        # 검색을 아직하지않은 첫화면일때는 모든 post를 작성시간순으로 보여준다.
         queryset = Post.objects.all()
+        local = request.query_params.get('searchword', None)
         
+        # 검색을 했을때는 queryset을 필터링해준다.
+        if local is not None:
+            queryset = queryset.filter(local__icontains=local)
+
         # page_size만큼의 post만 보내도록 queryset 재설정
         self.paginator.page_size_query_param = "page_size"
         page = self.paginate_queryset(queryset)
         
         if page is not None: 
             mypage = self.paginator.get_html_context() # page에 관련된 정보
-            return Response({'posts' : page, 'mypage' : mypage })
-        return Response({'posts': queryset})
+            return Response({'posts' : page, 'mypage' : mypage, 'local':local })
+        return Response({'posts': queryset, 'local':local})
 
 class PostDetailAPIView(APIView):
     renderer_classes = [TemplateHTMLRenderer]

@@ -29,7 +29,7 @@ def signup(request):
             store.save()
             # 로그인 한다
             auth.login(request, user)
-            return redirect('post-list')
+            return redirect('home')
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
     return render(request, 'signup.html')
    
@@ -41,7 +41,7 @@ def login(request):
             auth_login(request, login_form.get_user())
         else:
             return render(request, 'error.html')
-        return redirect('post-list')
+        return redirect('home')
     else:
         login_form = AuthenticationForm()
     
@@ -54,7 +54,7 @@ def logout(request):
     # logout으로 POST 요청이 들어왔을 때, 로그아웃 절차를 밟는다.
     if request.method == 'POST':
         auth.logout(request)
-        return redirect('post-list')
+        return redirect('home')
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     return render(request, 'logout.html')
