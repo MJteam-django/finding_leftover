@@ -53,13 +53,5 @@ class StoreDetailAPIView(ListAPIView):
         user = User.objects.get(pk=pk)
         queryset = user.post.all()
 
-        # page_size만큼의 post만 보내도록 queryset 재설정
-        self.paginator.page_size_query_param = "page_size"
-        page = self.paginate_queryset(queryset)
-        
-        if page is not None: 
-            mypage = self.paginator.get_html_context() # page에 관련된 정보
-            return Response({'stores' : page, 'mypage' : mypage, 'local':local })
-
         return Response({'store': store, 'posts':queryset})
 
