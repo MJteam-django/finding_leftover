@@ -20,15 +20,10 @@ class CreateUserForm(UserCreationForm):
             'password1' : forms.PasswordInput(attrs={'class': 'form-control'}),
             'password2' : forms.PasswordInput(attrs={'class': 'form-control'}),
         }
-        labels = {
-            'username': '사용자ID',
-            'password1': 'Password',
-            'password2': 'Password 확인',
-        }
+        
     # 생성한 user를 저장합니다.    
     def save(self, commit=True):
         user = super(CreateUserForm, self).save(commit=False)
-        # user.username = self.cleaned_data["username"] -> MultiValueDictKeyError 발생
         if commit:
             user.save()
         return user

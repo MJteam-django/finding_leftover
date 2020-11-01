@@ -6,12 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- form을 사용자에게 보여주고 정보를 받아옵니다 -->
+    <!-- 회원가입 form -->
      <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
         
-        {{form.as_p}}
-        <!--
         <p>username</p>
         <input type="text" name="username">
         <br>
@@ -30,10 +28,12 @@
         <input type="text" name="store_memo">
         <br>
         <p>store image</p>
-        <input type="file" name="store_image"> -->
-
+        <input type="file" name="store_image" accept="image/*">
         <br><br>
         <input type="submit" value="회원가입">
     </form> 
 </body>
 </html>
+
+
+        

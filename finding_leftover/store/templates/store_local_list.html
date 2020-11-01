@@ -19,7 +19,7 @@
         {% for store in stores %}
         <div class="card">
             <img class="card-img-top"
-                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                src="{{ store.store_image.url|slice:'1:' }}"
                 alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}">{{ store.store_name }}</a></h5>

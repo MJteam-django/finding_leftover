@@ -6,17 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 로그인 form -->
     <form  method="POST" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="form-group">
         {{ login_form }}
         </div>
-        <!-- <p>username</p>
-        <input type="text" name="username">
-        <br>
-        <p>password</p>
-        <input type="text" name="password"> -->
-        
         
         <br><br>
         <input type="submit" value="로그인">
