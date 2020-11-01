@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h2 class="display-4">잘못된 정보입니다.</h2><br>
+          <p>페이지를 뒤로가주세요.</p>
+        </div>
+      </div>
+</form>
+{% endblock %}

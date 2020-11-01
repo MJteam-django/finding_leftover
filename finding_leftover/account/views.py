@@ -39,8 +39,9 @@ def login(request):
         login_form = AuthenticationForm(request, request.POST)
         if login_form.is_valid():
             auth_login(request, login_form.get_user())
+        else:
+            return render(request, 'error.html')
         return redirect('post-list')
-    
     else:
         login_form = AuthenticationForm()
     
