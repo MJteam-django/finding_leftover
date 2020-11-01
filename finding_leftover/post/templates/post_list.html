@@ -26,33 +26,39 @@
   <br><br>
 
 
-<br>
-<br>
-
-<div class="card-columns">
-  {% for post in posts %}
-
+<div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4" style="margin : 1rem;" >
   
-  <!-- img 태그를 활용하여 프로젝트의 root 파일에 있는 media폴더 내부의 파일의 url을 반환합니다. -->
-  <div class="card">
+  {% for post in posts %}
+  <div class="col mb-3" >
+    
+    <!-- img 태그를 활용하여 프로젝트의 root 파일에 있는 media폴더 내부의 파일의 url을 반환합니다. -->
+    <div class="card" style="width:15rem; margin-top: 3rem;">
       <img class="card-img-top"
           src = "{{ post.image.url|slice:'1:' }}"
-          alt="Card image cap" style="width:100%; height:100%;">
+          alt="Card image cap" style="width:100%;">
       <div class="card-body">
-        {% if post.soldout %}
+        
         <h5 class="card-title">SOLD OUT</a></h5>
-        {% else %}
+        
           <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
-          <div class="card-text"><a href="{% url 'store-detail' pk=post.poster.pk%}">{{ post.restaurant }}</a></div></p>
-          {% endif %}
+<<<<<<< HEAD
+        
+=======
+          <div class="card-text">
+            <a href="{% url 'store-detail' pk=post.poster.pk%}">{{ post.restaurant }}</a><br/>
+            <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small>
+          </div>
+>>>>>>> upstream/master
       </div>
+    </div>
   </div>
   {% endfor %}
+  
 </div>
-
+</div>
 <!--pagination-->
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
+  <ul class="pagination offset-md-6">
     {%if mypage.previous_url%}
       <li class="page-item"><a class="page-link" href="{{ mypage.previous_url }}">Prev</a></li>
     {%endif%}
