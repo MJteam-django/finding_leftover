@@ -13,9 +13,3 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         # 포스트 모델에서 가져올 필드 정하기 id는 자동생성
         fields = '__all__'
-
-
-class StoreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Store
-        fields = '__all__' #지금은 그냥 all로 했는데 필요시 추가수정

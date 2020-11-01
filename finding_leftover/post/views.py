@@ -3,7 +3,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from .models import Post, Store
-from .serializers import PostSerializer, StoreSerializer
+from post.serializers import PostSerializer
+from store.serializers import StoreSerializer
 from rest_framework.filters import SearchFilter
 from django.contrib.auth.models import User 
 from django.shortcuts import redirect
