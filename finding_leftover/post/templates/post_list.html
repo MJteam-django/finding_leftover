@@ -37,11 +37,18 @@
           src = "{{ post.image.url|slice:'1:' }}"
           alt="Card image cap" style="width:100%;">
       <div class="card-body">
+        
+        <h5 class="card-title">SOLD OUT</a></h5>
+        
           <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
+<<<<<<< HEAD
+        
+=======
           <div class="card-text">
             <a href="{% url 'store-detail' pk=post.poster.pk%}">{{ post.restaurant }}</a><br/>
             <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small>
           </div>
+>>>>>>> upstream/master
       </div>
     </div>
   </div>
