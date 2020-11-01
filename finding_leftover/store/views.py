@@ -39,6 +39,15 @@ class StorelocalListAPI(ListAPIView):
         # 검색을 했을때는 queryset을 필터링해준다.
         if local is not None:
             queryset = queryset.filter(store_address__icontains=local)
+        
+        # page_size만큼의 post만 보내도록 queryset 재설정
+        self.paginator.page_size_query_param = "page_size"
+        page = self.paginate_queryset(queryset)
+        
+        if page is not None: 
+            mypage = self.paginator.get_html_context() # page에 관련된 정보
+            return Response({'stores' : page, 'mypage' : mypage, 'local':local })
+
         return Response({'stores': queryset, 'local':local})
 
 # 식당의 상세 페이지 조회
@@ -52,6 +61,14 @@ class StoreDetailAPIView(ListAPIView):
         store = Store.objects.get(pk=pk)
         user = User.objects.get(pk=pk)
         queryset = user.post.all()
+
+        # 6 만큼의 post만 보내도록 queryset 재설정
+        self.paginator.page_size = 6
+        page = self.paginate_queryset(queryset)
+
+        if page is not None: 
+            mypage = self.paginator.get_html_context() # page에 관련된 정보
+            return Response({'store': store, 'posts':page, 'mypage' : mypage})
 
         return Response({'store': store, 'posts':queryset})
 
