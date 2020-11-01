@@ -150,4 +150,4 @@ dmypy.json
 cython_debug/
 
 # media
-media/
+finding_leftover/media/
