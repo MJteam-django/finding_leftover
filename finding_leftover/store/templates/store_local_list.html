@@ -15,22 +15,47 @@
         </form>
     </div>
     <br/>
-    <div class="card-columns">
+
+    <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4" style="margin : 1rem;" >
+
         {% for store in stores %}
-        <div class="card">
-            <img class="card-img-top"
-                src="{{ store.store_image.url|slice:'1:' }}"
-                alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}">{{ store.store_name }}</a></h5>
-                <p class="card-text">{{ store.user }}</p></p>
+        <div class="col mb-3" >
+            <div class="card" style="width:15rem; margin-top: 3rem;">
+                <img class="card-img-top"
+                    src="{{ store.store_image.url|slice:'1:' }}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}">{{ store.store_name }}</a></h5>
+                    <p class="card-text">{{ store.store_address }}</p></p>
+                </div>
             </div>
         </div>
         {% endfor %}
         
     </div>
- 
+    
 
+<!--pagination-->
+<nav aria-label="Page navigation example">
+    <ul class="pagination offset-md-6">
+      {%if mypage.previous_url%}
+        <li class="page-item"><a class="page-link" href="{{ mypage.previous_url }}">Prev</a></li>
+      {%endif%}
+      
+      {% for link in mypage.page_links %}
+        {% if link.is_active %}
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="{{link.url}}">{{link.number}} <span class="sr-only">(current)</span></a>
+        {%else%}
+          <li class="page-item"><a class="page-link" href="{{link.url}}">{{link.number}}</a></li>
+        {% endif %}
+      {%endfor%}
+  
+      {%if mypage.next_url%}
+        <li class="page-item"><a class="page-link" href="{{ mypage.next_url }}">Next</a></li>
+      {%endif%}
+    </ul>
+  </nav>
 
 
 {% endblock %}
