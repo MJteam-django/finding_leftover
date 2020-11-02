@@ -14,9 +14,9 @@
             <p>
                 가게명 : <a href="{% url 'store-detail' pk=post.poster.pk%}">{{ post.restaurant }}</a><br>
                 <br>
-                <p style='text-decoration:line-through'>원가 : {{ post.origin_price }}<br></p>
+                <p style='text-decoration:line-through'>원가 : {{ post.origin_price }} 원<br></p>
                 <p>
-                    할인가 : {{ post.new_price }}<br>
+                    할인가 : {{ post.new_price }} 원<br>
                     <br>
                     {{ discount }} % 할인
                 </p>
@@ -26,7 +26,8 @@
     <tr>
         <td colspan="2" style="text-align: center;"><br>
             <hr>
-        <h4>{{ post.memo }}<br></h4>
+            <br>
+        <h5>{{ post.memo | linebreaksbr }}<br></h5>
         </td>
     </tr>
     
@@ -34,6 +35,7 @@
 </table>
     <h2>
         <br>
+        <hr>
     <br>
     
 

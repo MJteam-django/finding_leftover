@@ -6,7 +6,7 @@ from django.dispatch import receiver
 class Post(models.Model):
     restaurant = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='post', default='') #사용자에게 이미지 파일을 입력받아 화면에 띄우고 싶습니다.
+    image = models.ImageField(upload_to='post', default='default_image.jpg') #사용자에게 이미지 파일을 입력받아 화면에 띄우고 싶습니다.
     memo = models.TextField(blank=True)
     local = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
@@ -29,7 +29,7 @@ class Store(models.Model):
     #해당 User가 모든 store를 가지고 오고 싶을 사용할 이름 store=user.store.all()
     store_name = models.CharField(max_length=500, blank=True)
     store_address = models.CharField(max_length=30, blank=True)
-    store_image = models.ImageField(upload_to='store', default='')
+    store_image = models.ImageField(upload_to='store', default='default_image.jpg')
     store_memo = models.TextField(null=True, blank=True)
 
 # User가 생성될때 같이 Profile도 만들어라
