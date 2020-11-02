@@ -9,8 +9,8 @@
   
   <div class="jumbotron jumbotron-fluid1" align="center">
     <div class="container">
-      <h1 class="display-4"><b>우리 동네 음식점에서 남은 식자재 찾기</b></h1><br>
-
+      <h1 class="display-4" style="background-color: azure;background-color: rgba( 255, 255, 255, 0.5 );"><b>우리 동네 음식점에서 남은 식자재 찾기</b></h1><br>
+      <br>
       {% if user.is_authenticated %}
       {{ user.username }}님 반갑습니다<br><br>
       <button type="button" class="btn btn-primary" onclick=logout()>로그아웃</button>
@@ -20,7 +20,8 @@
       <button type="button" class="btn btn-info" onclick="location.href='/account/signup'">회원가입</button>
       <button type="button" class="btn btn-info" onclick="location.href='/account/login'">로그인</button>
       {% endif %}
-      
+      <br><br><br><br><br><br><br><br><br>
+      <button type="button" class="btn btn-outline-info" onclick="location.href='/post'">게시물 보러가기</button>
     </div>
   </div>
   <br><br>
