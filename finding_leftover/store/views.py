@@ -3,7 +3,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from post.models import Store
-from post.serializers import PostSerializer, StoreSerializer
+from post.serializers import PostSerializer
+from store.serializers import StoreSerializer
 from rest_framework.filters import SearchFilter
 from django.contrib.auth.models import User 
 from django.shortcuts import redirect
@@ -13,7 +14,7 @@ from post.pagination import CustomPagination
 
 # 식당 이름으로 검색
 class StorenameListAPI(ListAPIView):
-    serializer_class = StoreSerializer
+    #serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'store_name_list.html'
     pagination_class = CustomPagination
@@ -39,7 +40,7 @@ class StorenameListAPI(ListAPIView):
 
 # 식당 지역으로 검색
 class StorelocalListAPI(ListAPIView):
-    serializer_class = StoreSerializer
+    #serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'store_local_list.html'
     pagination_class = CustomPagination
@@ -66,7 +67,7 @@ class StorelocalListAPI(ListAPIView):
 
 # 식당의 상세 페이지 조회
 class StoreDetailAPIView(ListAPIView):
-    serializer_class = StoreSerializer
+    #serializer_class = StoreSerializer
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'store_detail.html'
     pagination_class = CustomPagination

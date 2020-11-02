@@ -148,3 +148,8 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# media
+finding_leftover/media/post/*.jpg
+finding_leftover/media/store/*.jpg
+*.jpg

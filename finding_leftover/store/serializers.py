@@ -1,6 +1,5 @@
 from rest_framework import serializers
-# 시리얼라이저 가져오고
-from .models import Store # Post 모델 가져오기
+from post.models import Store 
 
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:

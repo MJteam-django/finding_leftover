@@ -58,7 +58,7 @@ ROOT_URLCONF = 'finding_leftover.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')], #수정 - 첫페이지의 템플릿
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
