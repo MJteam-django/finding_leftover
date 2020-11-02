@@ -19,3 +19,7 @@ from six.moves import reduce
 pip install six 해주시면 됩니다.<br>
 ***
 감사합니다:)
+ <br><br><br>
+
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/70243735/97890914-76687800-1d71-11eb-84d9-daed0d823db2.gif)
