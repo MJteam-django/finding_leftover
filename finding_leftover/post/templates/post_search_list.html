@@ -5,18 +5,18 @@
 
 
 <br>
-{% if local %}
-<h1>Posts in {{ local }}</h1>
+{% if title %}
+<h1>Search results for '{{ title }}'</h1>
 {% else %}
-<h1>Local</h1>
+<h1>Search</h1>
 {% endif %}
 
 <br/>
 <div class ="search">
     <form action="" method="get">
-        <input type="text" name="searchword" placeholder="ex) 마포구" onkeyup="search(this);">
+        <input type="text" name="searchword" placeholder="ex) 연어" onkeyup="search(this);">
         <button type="submit" class="btn btn-light">Search</button> 
-        <button type="button" class="btn btn btn-light" onclick="location.href='/post/search'">음식으로 검색</button>
+        <button type="button" class="btn btn btn-light" onclick="location.href='/post'">지역으로 검색</button>
     </form>
     
 <br/>

@@ -7,8 +7,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.PostListAPIView.as_view(), name="post-list"),
+    path('search',views.PostSearchListAPIView().as_view(), name="post-search-list"),
     path('<int:pk>', views.PostDetailAPIView.as_view(), name="post-detail"),
-    
     path('create/', views.PostCreateAPIView.as_view(), name="post-create"), 
     path('update/<int:pk>', views.PostUpdateAPIView.as_view(), name="post-update"),
 
