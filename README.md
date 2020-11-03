@@ -19,3 +19,8 @@ from six.moves import reduce
 pip install six 해주시면 됩니다.<br>
 ***
 감사합니다:)
+
+프로젝트 영상 보기
+[![Watch the video](https://img.youtube.com/vi/cYArkpLIoG4/maxresdefault.jpg)](https://youtu.be/cYArkpLIoG4)
+
+
