@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<!--
 <body>
     <div class="account" style="width: 30%;">
     <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
@@ -59,7 +60,7 @@
       </form>
 
       
-     <!-- <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+      <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
         
         <p>username</p>
@@ -82,10 +83,24 @@
         
         <br><br>
         <input type="submit" value="회원가입">
-    </form>  -->
+    </form> 
     
 </div>
-</body>
+</body> -->
+
+<!--body는 정서님이 block이전에 선언해놓으셨기때문에 뺐습니다!-->
+<form method="POST" action="{% url 'signup' %}"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6 offset-3">
+        <h2><strong>회원 가입</strong></h2><br/>
+        {{ signup_form.as_p }}
+        <button type="submit" class="btn btn-info offset-10">가입하기</button>
+      </div>
+    </div>
+    
+</form>
+
 {% endblock %}
 
 

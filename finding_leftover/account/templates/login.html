@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
+<!--
 <body>
-    <!-- 로그인 form -->
+    로그인 form
     <div class="account" style="width: 30%;">
     <form  method="POST" action="{% url 'login' %}">
         {% csrf_token %}
@@ -31,5 +31,14 @@
     </form>
 </div>
 </body>
-</html>
+</html> body와 html은 block이전에 이미 있어서 중복할 필요가 없어보입니다!
+-->
+
+<form method="POST">
+    {% csrf_token %}
+    
+    {{ login_form.as_p }}
+    <button type="submit" class="btn btn-info">로그인</button>
+</form>
+
 {% endblock %}

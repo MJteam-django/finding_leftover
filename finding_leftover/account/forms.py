@@ -12,14 +12,17 @@ from django.contrib.auth.forms import UserCreationForm
 
 # 회원가입 기능을 위한 Form입니다.
 class CreateUserForm(UserCreationForm):
+    #password1,2는 form에서 선언된 필드입니다. 그 필드에서는 Meta.widgets가 적용될수 없습니다!
+    password1 = forms.CharField(max_length=16, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password from numbers and letters of the Latin alphabet'}))
+    password2 = forms.CharField(max_length=16, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password confirm'}))
+    
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'password1','password2')
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'15자 이내로 입력 가능합니다.'}),
-            'password1' : forms.PasswordInput(attrs={'class': 'form-control'}),
-            'password2' : forms.PasswordInput(attrs={'class': 'form-control'}),
-        }
+        } 
+    
         
     # 생성한 user를 저장합니다.    
     def save(self, commit=True):
@@ -34,7 +37,11 @@ class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
         fields = ('store_name', 'store_address', 'store_memo', 'store_image')
-        
+        widgets = {
+            'store_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'15자 이내로 입력 가능합니다.'}),
+            'store_address' : forms.TextInput(attrs={'class': 'form-control', 'placeholder':'15자 이내로 입력 가능합니다.'}),
+            'store_memo' : forms.Textarea(attrs={'class': 'form-control'}),
+        }
 
 # CreateUserForm과 StoreForm을 합치기 위해서 MultimodelForm을 사용했습니다
 class UserCreationMultiForm(MultiModelForm):
