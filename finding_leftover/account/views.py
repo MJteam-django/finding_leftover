@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 
 from post.models import Store
-
+"""
 #회원 가입 완
 def signup(request):
     # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
@@ -32,7 +32,26 @@ def signup(request):
             return redirect('home')
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
     return render(request, 'signup.html')
-   
+"""
+def signup(request):
+    # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
+    if request.method == 'POST':
+        signup_form = UserCreationMultiForm(request.POST, request.FILES) 
+        #주의!! 이미지 때문에 files역시 받아야함
+
+        if signup_form.is_valid():
+            user = signup_form['user'].save() #user저장하고
+            store = signup_form['store'].save(commit=False)
+            store.user=user # store랑 user를 연결
+            store.save() #그때 store를 저장
+            auth.login(request, user) # 로그인
+            return redirect('home')
+
+    # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
+    else:
+        signup_form = UserCreationMultiForm()
+    return render(request, 'signup.html', {'signup_form':signup_form})
+
 
 def login(request):
     if request.method == 'POST':
