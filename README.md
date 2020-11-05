@@ -42,6 +42,10 @@ from six.moves import reduce
 ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/70243735/98221507-0f2a0e00-1f93-11eb-9de2-2bbe3702d814.gif)
 
 ***
+## 모델 구조
+![model_new](https://user-images.githubusercontent.com/70243735/98248933-f896ad80-1fb8-11eb-82c3-17f82ea41b4d.JPG)
+
+***
 ## 구현 기능
 ### [ Acount App ]
 &ensp;: FBV로 구현 <br>
@@ -80,4 +84,5 @@ from six.moves import reduce
       - ex)'하남돼지집'
  - [X] 음식점의 개별 페이지
       - 해당 음식점의 소개와 판매글들을 볼 수 있다.
- 
+
+
