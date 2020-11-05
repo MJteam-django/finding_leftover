@@ -8,43 +8,21 @@ from .forms import UserCreationMultiForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 
-from post.models import Store
-"""
-#회원 가입 완
-def signup(request):
-    # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
-    if request.method == 'POST':
-        # password와 confirm에 입력된 값이 같다면
-        if request.POST['password'] == request.POST['confirm']:
-            # user 객체를 새로 생성
-            user = User.objects.create_user(
-                username=request.POST['username'], 
-                password=request.POST['password'], 
-                )
-            store_name = request.POST.get("store_name","")
-            store_address = request.POST['store_address']
-            store_memo = request.POST['store_memo']
-            store_image = request.FILES['store_image']
-            store = Store(user=user, store_name=store_name, store_address=store_address, store_memo=store_memo, store_image=store_image)
-            store.save()
-            # 로그인 한다
-            auth.login(request, user)
-            return redirect('home')
-    # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.
-    return render(request, 'signup.html')
-"""
+from store.models import Store
+
 def signup(request):
     # signup 으로 POST 요청이 왔을 때, 새로운 유저를 만드는 절차를 밟는다.
     if request.method == 'POST':
         signup_form = UserCreationMultiForm(request.POST, request.FILES) 
-        #주의!! 이미지 때문에 files역시 받아야함
 
         if signup_form.is_valid():
-            user = signup_form['user'].save() #user저장하고
+            user = signup_form['user'].save()  # user 저장하고
             store = signup_form['store'].save(commit=False)
-            store.user=user # store랑 user를 연결
-            store.save() #그때 store를 저장
-            auth.login(request, user) # 로그인
+            store.user=user                     # store랑 user를 연결
+            store.store_address = request.POST.get('address') + request.POST.get('detailAddress') + request.POST.get('extraAddress')
+            store.store_local = (request.POST.get('local'))
+            store.save()                        # store를 저장
+            auth.login(request, user)           # 로그인
             return redirect('home')
 
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.

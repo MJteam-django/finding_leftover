@@ -1,7 +1,7 @@
 
 from django.contrib.auth.models import User
 from django import forms
-from post.models import Store
+from store.models import Store
 from django import forms
 from django.forms import ModelForm
 
@@ -36,10 +36,10 @@ class CreateUserForm(UserCreationForm):
 class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
-        fields = ('store_name', 'store_address', 'store_memo', 'store_image')
+        fields = ('store_name', 'store_memo', 'store_image')
         widgets = {
             'store_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'15자 이내로 입력 가능합니다.'}),
-            'store_address' : forms.TextInput(attrs={'class': 'form-control', 'placeholder':'15자 이내로 입력 가능합니다.'}),
+            #'store_address' : forms.TextInput(attrs={'class': 'form-control', 'placeholder':'15자 이내로 입력 가능합니다.'}),
             'store_memo' : forms.Textarea(attrs={'class': 'form-control'}),
         }
 

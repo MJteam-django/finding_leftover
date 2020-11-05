@@ -1,7 +1,6 @@
 from rest_framework import serializers
-# 시리얼라이저 가져오고
-from .models import Post, Store # Post 모델 가져오기
-
+from post.models import Post
+from store.models import Store
 
 # 모델을 가져와서 직렬화하겠다는거, 매개변수 모델 시리얼라이저
 class PostSerializer(serializers.ModelSerializer):

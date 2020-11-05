@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
-from post.models import Store
+from store.models import Store
 from post.serializers import PostSerializer
 from store.serializers import StoreSerializer
 from rest_framework.filters import SearchFilter
