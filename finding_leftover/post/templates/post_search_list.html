@@ -2,7 +2,7 @@
 
 
 {% block content %}
-
+<container>
 
 <br>
 {% if title %}
@@ -25,18 +25,16 @@
 <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4" style="margin : 1rem;" >
   
   {% for post in posts %}
-  <div class="col mb-3" >
-    
-    <!-- img 태그를 활용하여 프로젝트의 root 파일에 있는 media폴더 내부의 파일의 url을 반환합니다. -->
-    <div class="card" style="width:15rem; margin-top: 3rem;">
+  <div class="col" >
+        <div class="card" style="margin : 0.5rem; margin-top:2.5rem">
       <img class="card-img-top"
           src = "{{ post.image.url|slice:'1:' }}"
-          alt="Card image cap" style="width:15rem; height : 15rem;">
+          alt="Card image cap">
       <div class="card-body">
         {% if post.soldout %}
         <h5 class="card-title">SOLD OUT</h5>
         {% else %}
-          <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}">{{ post.title }}</a></h5>
+          <h5 class="card-title"><a href="{% url 'post-detail' pk=post.pk%}" class="stretched-link">{{ post.title }}</a></h5>
         {% endif %}
         <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small>
       </div>
@@ -45,6 +43,7 @@
   {% endfor %}
   
 </div>
+<br/><br/><br/>
 
 <!--pagination-->
 <nav aria-label="Page navigation example">
@@ -68,7 +67,7 @@
   </ul>
 </nav>
 
-
+</container>
 
 
 {% endblock %}

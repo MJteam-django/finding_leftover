@@ -1,12 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<container>
+  <br/>
     {% if local %}
     <h1>Stores in {{ local }}</h1>
     {% else %}
     <h1>Local</h1>
     {% endif %}
-    
+
     <br/>
     <div class ="search">
         <form action="" method="get">
@@ -20,13 +22,13 @@
     <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4" style="margin : 1rem;" >
 
         {% for store in stores %}
-        <div class="col mb-3" >
-            <div class="card" style="width:15rem; margin-top: 3rem;">
+        <div class="col" >
+            <div class="card" style="margin: 0.5rem; margin-top:2.5rem">
                 <img class="card-img-top"
                     src="{{ store.store_image.url|slice:'1:' }}"
                     alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}">{{ store.store_name }}</a></h5>
+                    <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}" class="stretched-link">{{ store.store_name }}</a></h5>
                     <p class="card-text">{{ store.store_address }}</p></p>
                 </div>
             </div>
@@ -58,5 +60,5 @@
     </ul>
   </nav>
 
-
+</container>
 {% endblock %}
