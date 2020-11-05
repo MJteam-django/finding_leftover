@@ -16,6 +16,9 @@ class Store(models.Model):
     store_like = models.IntegerField(null=True, blank=True)
     store_local = models.CharField(max_length=20, null=True, blank=True)
 
+    class Meta:
+        ordering = ['-store_name']
+
 # User가 생성될때 같이 Profile도 만들어라
 @receiver(post_save, sender=User)
 def create_Store(sender, **kwargs):

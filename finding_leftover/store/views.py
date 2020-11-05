@@ -53,7 +53,7 @@ class StorelocalListAPI(ListAPIView):
 
         # 검색을 했을때는 queryset을 필터링해준다.
         if local is not None:
-            queryset = queryset.filter(store_address__icontains=local)
+            queryset = queryset.filter(store_local__icontains=local)
         
         # page_size만큼의 post만 보내도록 queryset 재설정
         self.paginator.page_size_query_param = "page_size"
