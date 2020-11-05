@@ -17,6 +17,8 @@
 ***
 ## 설치
 
+<br>
+
 ```python
 pip install django
 pip install djangorestframework
@@ -33,7 +35,49 @@ from six.moves import reduce
 ***
 ## 실행 화면
 
+<br>
+
+
+
 ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/70243735/98221507-0f2a0e00-1f93-11eb-9de2-2bbe3702d814.gif)
 
 ***
 ## 구현 기능
+### [ Acount App ]
+&ensp;: FBV로 구현 <br>
+ - [X] 로그인/로그아웃
+      - AuthenticationForm를 통한 사용자 인증
+      - 사용자의 인증이 올바르지않을 경우 에러페이지
+ - [X] 회원가입과 동시에 음식점 등록
+      - UserCreationForm을 상속받아 변경후 사용
+      - 음식점의 주소는 주소 검색 API로 다음 우편번호 서비스를 이용하여 받습니다.
+      
+### [ Post App ]
+&ensp;: CBV를 통한 요청처리 <br>
+&ensp;: HttpTempleteRenderer 사용 <br>
+&ensp;: CustomPaginator를 통한 페이징 기능 <br>
+ - [X] Create
+      - 회원만 가능
+ - [X] Read
+      - 비회원도 가능
+ - [X] Update
+      - 작성자만 가능
+      - sold out 처리도 가능
+ - [X] Delete
+      - 작성자만 가능
+      - AJAX를 통한 post delete요청
+ - [X] 우리 동네 판매글 검색
+      - 다음 우편번호 서비스에서 받은 '시/도 + 시/군/구'를 기반으로 검색
+ - [X] 제목으로 판매글 검색      
+      - ex)'연어'
+### [ Post App ]
+&ensp;: CBV를 통한 요청처리 <br>
+&ensp;: HttpTempleteRenderer 사용 <br>
+&ensp;: CustomPaginator를 통한 페이징 기능 <br>
+ - [X] 우리 동네 음식점 검색
+      - 다음 우편번호 서비스에서 받은 '시/도 + 시/군/구'를 기반으로 검색
+ - [X] 음식점 이름으로 음식점 검색  
+      - ex)'하남돼지집'
+ - [X] 음식점의 개별 페이지
+      - 해당 음식점의 소개와 판매글들을 볼 수 있다.
+ 
