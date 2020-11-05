@@ -1,38 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<!--
-<body>
-    로그인 form
-    <div class="account" style="width: 30%;">
-    <form  method="POST" action="{% url 'login' %}">
-        {% csrf_token %}
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">username</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="username">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" name="password">
-          </div>
-
-          
-        <br><br>
-
-        <div class="form-group ">
-            <div class="col-sm-10">
-                <br>
-                <button type="submit" class="btn btn-info">로그인</button>
-            </div>
-          </div>
-    </form>
-</div>
-</body>
-</html> body와 html은 block이전에 이미 있어서 중복할 필요가 없어보입니다!
--->
 
 <form method="POST">
     {% csrf_token %}

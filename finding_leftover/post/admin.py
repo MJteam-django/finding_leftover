@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Post, Store # 모델 만든거 가져오기
+from post.models import Post
+from store.models import Store # 모델 만든거 가져오기
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User 
 

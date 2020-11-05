@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
-from post.models import Store
+from store.models import Store
 from post.serializers import PostSerializer
 from store.serializers import StoreSerializer
 from rest_framework.filters import SearchFilter
@@ -53,7 +53,7 @@ class StorelocalListAPI(ListAPIView):
 
         # 검색을 했을때는 queryset을 필터링해준다.
         if local is not None:
-            queryset = queryset.filter(store_address__icontains=local)
+            queryset = queryset.filter(store_local__icontains=local)
         
         # page_size만큼의 post만 보내도록 queryset 재설정
         self.paginator.page_size_query_param = "page_size"
