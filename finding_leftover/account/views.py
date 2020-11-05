@@ -19,10 +19,13 @@ def signup(request):
             user = signup_form['user'].save()  # user 저장하고
             store = signup_form['store'].save(commit=False)
             store.user=user                     # store랑 user를 연결
+            
+            # 주소저장
             store.store_address = request.POST.get('address') + request.POST.get('detailAddress') + request.POST.get('extraAddress')
             store.store_local = (request.POST.get('local'))
+            
             store.save()                        # store를 저장
-            auth.login(request, user)           # 로그인
+            auth.login(request, user)
             return redirect('home')
 
     # signup으로 GET 요청이 왔을 때, 회원가입 화면을 띄워준다.

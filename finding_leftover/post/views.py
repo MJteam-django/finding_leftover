@@ -15,7 +15,7 @@ from django.http import HttpResponse
 from rest_framework import status
 from post.pagination import CustomPagination
 
-# 포스팅 목록
+# 포스팅 지역으로 검색
 class PostListAPIView(ListAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_list.html'
@@ -39,6 +39,7 @@ class PostListAPIView(ListAPIView):
             return Response({'posts' : page, 'mypage' : mypage, 'local':local })
         return Response({'posts': queryset, 'local':local})
 
+# 포스팅 제목으로 검색
 class PostSearchListAPIView(ListAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_search_list.html'
@@ -62,38 +63,37 @@ class PostSearchListAPIView(ListAPIView):
             return Response({'posts' : page, 'mypage' : mypage, 'title':title })
         return Response({'posts': queryset, 'title':title})
 
-
+# 포스팅 상세 조회
 class PostDetailAPIView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_detail.html'
 
     def get(self, request, pk):
         queryset = Post.objects.get(pk=pk)
-        discount = int((queryset.origin_price-queryset.new_price)/ queryset.origin_price *100)
+        discount = int((queryset.origin_price-queryset.new_price)/ queryset.origin_price *100) # 할인율
         return Response({'post': queryset, 'discount':discount})
         
 
-
-
-
 # 포스팅 작성
-class PostCreateAPIView(CreateAPIView):
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
+class PostCreateAPIView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'post_create.html'
 
     # 포스팅 작성 폼 보여주기
     def get(self, request): 
+        # form클래스 대신 serializer
         serializer = PostSerializer()
         return Response({'serializer': serializer})
 
     # 작성한 포스팅을 저장하고 전체 포스팅 목록으로
     def post(self, request): 
         serializer = PostSerializer(data=request.data)
+
         if not serializer.is_valid():
             return Response({'serializer': serializer})
-        user=self.request.user
+        
+        user=self.request.user 
+        # post와 유저를 연결, post에관한 유저정보는 사용자가 입력하는 것이아닌 자동으로
         serializer.save(poster=user,restaurant=user.store.store_name,local=user.store.store_local) 
         # perform_create()가 serializer.save()를 해줌
         return redirect('post-list') 
@@ -107,6 +107,7 @@ class PostUpdateAPIView(APIView):
     # 포스팅 수정 폼 보여주기
     def get(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
+        # form클래스 대신 serializer
         serializer = PostSerializer(post)
         return Response({'serializer': serializer, 'post': post})
 
@@ -114,6 +115,7 @@ class PostUpdateAPIView(APIView):
     def post(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
         serializer = PostSerializer(post, data=request.data)
+        
         if not serializer.is_valid():
             return Response({'serializer': serializer, 'post': post})
         serializer.save()
