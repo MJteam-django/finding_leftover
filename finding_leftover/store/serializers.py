@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from post.models import Store 
+from store.models import Store
 
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:

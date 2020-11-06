@@ -3,19 +3,21 @@
 {% block content %}
 
 
-<div class="row">
+<div class="row d-flex">
     <div class="col-4" style="background-color: #bfbab078;">
-        <div>
-            <img class ="col-7 offset-2 rounded-circle" src="{{ store.store_image.url|slice:'1:' }}"
+        <div class="text-center">
+            <img class ="col-7 rounded-circle" src="{{ store.store_image.url|slice:'1:' }}"
             alt="store" style= "margin-top:6rem;">
         </div>
         
-        <div class="col-7 offset-2" style= "margin-top:1rem; margin-bottom:1rem">
+        <div class="text-center" style= "margin-top:1.5rem; margin-bottom:1rem">
             <h3><strong>{{store.store_name}}</strong></h3>
         </div>
-        <div class="col-8 offset-1">
-            <p><strong>위치 :</strong> {{store.store_address}}</p>
-            <p>{{store.store_memo}}</p>
+        <div class="text-center">
+            <strong>위치 :&nbsp;</strong> {{store.store_address}}
+        </div>
+        <div class="text-center" style= "margin-top:0.5rem;">
+            {{store.store_memo| linebreaksbr}}
         </div>
         
         
@@ -31,11 +33,11 @@
             </div>
             {% endif %}
         </div>
-        <div class="row row-cols-1 row-cols-md-3" style="margin:2rem; margin-left:3rem;">
+        <div class="row row-cols-1 row-cols-md-3" style="margin:2rem; margin-left:3rem; min-height:400px">
             {% for post in posts %}
             <div class="col mb-4">
-                <div class="card" style="width: 12rem;">
-                    <img class="card-img-top" src="{{ post.image.url|slice:'1:' }}" style="width: 12rem; height: 12rem;"
+                <div class="card">
+                    <img class="card-img-top" src="{{ post.image.url|slice:'1:' }}"
                         alt="Card image cap">
                     <div class="card-body">
                         <div class="card-title">
@@ -48,8 +50,8 @@
                         <div class="card-text">
                             <b>{{post.new_price}} 원</b>  <small><del>{{post.origin_price}}원</del></small><br/>
                             {% if user.pk == store.pk%}
-                            <div class="row">
-                                <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-primary btn-sm offset-5">수정</a>
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-primary btn-sm">수정</a>
                                     &nbsp;
                                 <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-outline-danger btn-sm btn_comment_delete">삭제</a>
                             </div>
