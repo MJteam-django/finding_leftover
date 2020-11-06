@@ -74,7 +74,7 @@ from six.moves import reduce
       - 다음 우편번호 서비스에서 받은 '시/도 + 시/군/구'를 기반으로 검색
  - [X] 제목으로 판매글 검색      
       - ex)'연어'
-### [ Post App ]
+### [ Store App ]
 &ensp;: CBV를 통한 요청처리 <br>
 &ensp;: HttpTempleteRenderer 사용 <br>
 &ensp;: CustomPaginator를 통한 페이징 기능 <br>
