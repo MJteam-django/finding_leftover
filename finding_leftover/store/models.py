@@ -2,6 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 #user와 Store을 연결시켜 user모델확장
@@ -13,13 +14,18 @@ class Store(models.Model):
     store_address = models.CharField(max_length=50, blank=True)
     store_image = models.ImageField(upload_to='store', default='default_image.jpg')
     store_memo = models.TextField(null=True, blank=True)
-    store_like = models.IntegerField(default=0)
-    store_like_users = models.ManyToManyField(User, blank=True, related_name='like_stores')
+    store_like_count = models.IntegerField(default=0)
+    store_like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='like_stores')
+    #User보다 우선적으로 사용
     store_local = models.CharField(max_length=20, null=True, blank=True)
     
+    
+    def count_likes_user(self):
+        return self.store_like_user.count()
+        
     #store like으로 역순정렬, 같으면 name으로 역순정렬
     class Meta:
-        ordering = ['-store_like','-store_name']
+        ordering = ['-store_like_count','-store_name']
 
 # User가 생성될때 같이 Profile도 만들어라
 @receiver(post_save, sender=User)

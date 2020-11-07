@@ -85,40 +85,26 @@ class StoreDetailAPIView(ListAPIView):
             return Response({'store': store, 'posts':page, 'mypage' : mypage})
 
         return Response({'store': store, 'posts':queryset})
-
+    
+    # 식당의 좋아요에 관한 요청(ajax POST요청으로 들어옴)
     def post(self, request, pk):
         store = get_object_or_404(Store, pk=pk)
-        serializer = StoreSerializer(store, data=request.data)
         user = request.user
 
-        check_like_user = Store.store_like_users.
-
-        if check_like_post.exists():
-            profile.like_posts.remove(post)
-            post.like_count -= 1
-            post.save()
+        if store.store_like_user.filter(id=user.id).exists():
+            store.store_like_user.remove(user)
+            msg = "좋아요 취소"
         else:
-            profile.like_posts.add(post)
-            post.like_count += 1
-            post.save()
-        # 좋아요한 사람을 저장할 컬럼 필요함ㅎㅎ 
-        if store.store_like.filter(id = user.pk):
-            print("여기")
-        if serializer.is_valid():
-            store = Store.objects.get(pk=pk)
-            user_name = request.POST['name_give']
-            print(user_name)
-            
-            print(store.store_name)
-            store.store_like += 1
-            store.save()
-                
-            return HttpResponse(json.dumps({'msg': "success"}), content_type="application/json")
-        serializer.save()
-
-        # ajax호출인 경우 like를 1 증가
+            store.store_like_user.add(user)
+            msg = "좋아요"
+        
+        count = store.count_likes_user()
+        store.store_like_count = count
+        store.save()
+        context = {'like_count':store.count_likes_user(), 'msg':msg}
+        return HttpResponse(json.dumps(context), content_type="application/json")
         
 
-        return redirect('store-detail',post.poster.id) 
+         
 
 
