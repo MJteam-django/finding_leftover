@@ -13,11 +13,13 @@ class Store(models.Model):
     store_address = models.CharField(max_length=50, blank=True)
     store_image = models.ImageField(upload_to='store', default='default_image.jpg')
     store_memo = models.TextField(null=True, blank=True)
-    store_like = models.IntegerField(null=True, blank=True)
+    store_like = models.IntegerField(default=0)
+    store_like_users = models.ManyToManyField(User, blank=True, related_name='like_stores')
     store_local = models.CharField(max_length=20, null=True, blank=True)
-
+    
+    #store like으로 역순정렬, 같으면 name으로 역순정렬
     class Meta:
-        ordering = ['-store_name']
+        ordering = ['-store_like','-store_name']
 
 # User가 생성될때 같이 Profile도 만들어라
 @receiver(post_save, sender=User)

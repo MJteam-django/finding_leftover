@@ -29,7 +29,8 @@
                     alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}" class="stretched-link">{{ store.store_name }}</a></h5>
-                    <p class="card-text">{{ store.store_address }}</p></p>
+                    <p class="card-text">{{ store.store_address }}</p>
+                    <p class="card-text">like : {{ store.store_like }}</p>
                 </div>
             </div>
         </div>

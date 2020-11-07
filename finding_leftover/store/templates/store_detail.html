@@ -19,7 +19,33 @@
         <div class="text-center" style= "margin-top:0.5rem;">
             {{store.store_memo| linebreaksbr}}
         </div>
-        
+        <div class="text-center" style= "margin-top:0.5rem;">
+            {{store.store_like}}
+            <button id="like_button" onclick="LikeUp()">좋아요</button>
+            <input type="hidden" id="user_name" name="user_name" value="{{ user.username }}">
+        </div>
+        <script>
+            function LikeUp(){
+                let user_name = $('#user_name').val()
+                console.log(user_name)
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'store-detail' pk=store.pk %}",
+                    data: {'name_give': user_name, csrfmiddlewaretoken: '{{ csrf_token }}'},
+                    success: function (response) {
+                        
+                        // '좋아요 완료!' 얼럿을 띄웁니다.
+                        alert(response.msg)
+                        // 좋아요 버튼을 사라지게합니다.
+                        $('#like_button').hide()
+                        // 변경된 정보를 반영하기 위해 새로고침합니다.
+                        window.location.reload()
+                        
+                    }
+                });
+            }
+        </script>
         
 
     </div>

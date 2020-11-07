@@ -13,10 +13,12 @@ class Post(models.Model):
     poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post')
     #해당 User의 모든 posts를 모두 가져오고 싶을때 사용할 ORM은 post=user.post.all()
     soldout = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return self.title
     
+    # like 순서대로 정렬하되 like가 같으면 생성시각으로 정렬
     class Meta:
         ordering = ['-created']
 
