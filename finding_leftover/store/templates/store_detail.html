@@ -19,7 +19,42 @@
         <div class="text-center" style= "margin-top:0.5rem;">
             {{store.store_memo| linebreaksbr}}
         </div>
+        <div class="count_likes_user" style= "margin-top:0.5rem; text-align: center;">
+            좋아요 {{ store.store_like_count }}개
+        </div>
+        <div style="margin-top:0.5rem; text-align: center;">
+            <a href="" class="badge badge-warning" onclick="LikeUp()">like</a>
+            
+        </div>
         
+        <script>
+            function LikeUp(){
+                let user_name = $('#user_name').val()
+                
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'store-detail' pk=store.pk %}",
+                    data: { csrfmiddlewaretoken: '{{ csrf_token }}'},
+                    success: function (response) {
+                        
+                        // '좋아요 완료!' 얼럿을 띄웁니다.
+                        alert(response.msg)
+                        count = response.like_count
+                        $(".count_likes_user").empty()
+                        $(".count_likes_user").append(
+                            `
+                            좋아요 ${count}개
+                            `
+                        )
+                        window.location.reload()
+                        // 변경된 정보를 반영하기 위해 새로고침합니다.
+                        
+                        
+                    }
+                });
+            }
+        </script>
         
 
     </div>

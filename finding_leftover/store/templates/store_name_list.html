@@ -24,6 +24,9 @@
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'store-detail' pk=store.pk%}" class="stretched-link">{{ store.store_name }}</a></h5>
                     <p class="card-text">{{ store.store_address }}</p></p>
+                    <div class="count_likes_user" style= "margin-top:0.5rem;">
+                      좋아요 {{ store.store_like_count }}개
+                  </div>
                 </div>
             </div>
         </div>

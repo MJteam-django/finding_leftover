@@ -10,7 +10,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from post.pagination import CustomPagination
-
+from django.http import HttpResponse
+import json
 
 # 식당 이름으로 검색
 class StorenameListAPI(ListAPIView):
@@ -69,6 +70,7 @@ class StoreDetailAPIView(ListAPIView):
     template_name = 'store_detail.html'
     pagination_class = CustomPagination
 
+
     def get(self, request, pk):
         store = Store.objects.get(pk=pk)
         user = User.objects.get(pk=pk)
@@ -83,4 +85,26 @@ class StoreDetailAPIView(ListAPIView):
             return Response({'store': store, 'posts':page, 'mypage' : mypage})
 
         return Response({'store': store, 'posts':queryset})
+    
+    # 식당의 좋아요에 관한 요청(ajax POST요청으로 들어옴)
+    def post(self, request, pk):
+        store = get_object_or_404(Store, pk=pk)
+        user = request.user
+
+        if store.store_like_user.filter(id=user.id).exists():
+            store.store_like_user.remove(user)
+            msg = "좋아요 취소"
+        else:
+            store.store_like_user.add(user)
+            msg = "좋아요"
+        
+        count = store.count_likes_user()
+        store.store_like_count = count
+        store.save()
+        context = {'like_count':store.count_likes_user(), 'msg':msg}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+        
+
+         
+
 
