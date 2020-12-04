@@ -47,7 +47,7 @@ from six.moves import reduce
 
 ***
 ## 구현 기능
-### [ Acount App ]
+### [ Account App ]
 &ensp;: FBV로 구현 <br>
  - [X] 로그인/로그아웃
       - AuthenticationForm를 통한 사용자 인증
@@ -90,4 +90,3 @@ from six.moves import reduce
 ## 배포
 &ensp;: AWS EC2 가상머신으로 배포 환경 구축<br>
 &ensp;: Ubuntu 서버를 이용하여 프로젝트 배포<br>
-&ensp;프로젝트 링크: http://13.125.254.38/
